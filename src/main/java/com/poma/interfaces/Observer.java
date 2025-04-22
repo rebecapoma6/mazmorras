@@ -1,5 +1,5 @@
 package com.poma.interfaces;
 
-public class Observer {
+public interface Observer {
     
 }
