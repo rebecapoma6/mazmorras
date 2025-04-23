@@ -56,9 +56,14 @@ abstract class Personaje {
         this.danio = danio;
     }
 
-    public void recibirDanio(int danio){
-        this.puntosVida -= danio;
+    public int calcularPuntosVida(int puntosVida, int fuerza, int defensa) {
+        int danio = fuerza - defensa;
+        if(danio < 0){
+            danio = 0;
+        }
+        return danio -= puntosVida;
 
+        
     }
 
     
