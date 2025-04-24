@@ -8,12 +8,14 @@ abstract class Personaje {
     protected int fuerza;
     protected int danio;
 
-    Personaje(String nombre, int puntosVida, int defensa, int fuerza){
+  
+
+    Personaje(String nombre, int defensa, int fuerza, int danio, int puntosVida){
         this.nombre = nombre;
-        this.puntosVida = puntosVida;
         this.defensa = defensa;
         this.fuerza = fuerza;
-        this.danio = 10;
+        this.danio = danio;
+        this.puntosVida = puntosVida;
     }
 
     public String getNombre() {
@@ -56,9 +58,14 @@ abstract class Personaje {
         this.danio = danio;
     }
 
-    public void recibirDanio(int danio){
-        this.puntosVida -= danio;
+    public int calcularPuntosVida(int puntosVida, int fuerza, int defensa) {
+        int danio = fuerza - defensa;
+        if(danio < 0){
+            danio = 0;
+        }
+        return danio -= puntosVida;
 
+        
     }
 
     
