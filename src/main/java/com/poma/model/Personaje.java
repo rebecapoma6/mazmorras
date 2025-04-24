@@ -58,12 +58,25 @@ abstract class Personaje {
         this.danio = danio;
     }
 
-    public int calcularPuntosVida(int puntosVida, int fuerza, int defensa) {
-        int danio = fuerza - defensa;
-        if(danio < 0){
-            danio = 0;
+    public void CalcularPuntosVida(int danio) {
+        int danioReal = danio - defensa;
+        if (danioReal < 0) {
+            danioReal = 0; // Si el daño es menor que 0, se convierte en 0
         }
-        return danio -= puntosVida;
+        puntosVida -= danioReal; // Resta el daño real de los puntos de vida
+        if (puntosVida < 0) {
+            puntosVida = 0; // Asegura que los puntos de vida no sean negativos
+        }
+    }
+
+    public boolean estaVivo(){ //por ejemplo para cuando un enemigo muere... si su vida se queda a cero... "vivo" retorna a falso
+        boolean vivo = true;
+        if(puntosVida > 0){
+            return vivo;
+        }else{
+            return false;
+        }
+    }
 
         
     }
@@ -74,4 +87,4 @@ abstract class Personaje {
 
 
 
-}
+
