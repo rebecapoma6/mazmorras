@@ -16,6 +16,6 @@
       <Label layoutX="134.0" layoutY="192.0" text="Defensa" />
       <Label layoutX="133.0" layoutY="239.0" text="Fuerza" />
       <TextField fx:id="txtFuerza" layoutX="210.0" layoutY="235.0" promptText="Fuerza" />
-      <Button fx:id="btnIniciar" layoutX="259.0" layoutY="303.0" mnemonicParsing="false" onAction="#iniciarPartida" text="INICIAR" />
+      <Button fx:id="btnIniciar" layoutX="259.0" layoutY="303.0" mnemonicParsing="false" text="INICIAR" />
    </children>
 </AnchorPane>
