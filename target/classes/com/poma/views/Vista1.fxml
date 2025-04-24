@@ -5,10 +5,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/Dev_Diego
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poma.controller.Vista1Controller">
    <children>
       <Label layoutX="244.0" layoutY="46.0" text="Nuevo Jugador" />
@@ -20,6 +16,6 @@
       <Label layoutX="134.0" layoutY="192.0" text="Defensa" />
       <Label layoutX="133.0" layoutY="239.0" text="Fuerza" />
       <TextField fx:id="txtFuerza" layoutX="210.0" layoutY="235.0" promptText="Fuerza" />
-      <Button fx:id="btnIniciar" layoutX="259.0" layoutY="303.0" mnemonicParsing="false" onAction="#iniciarPartida" text="INICIAR" />
+      <Button fx:id="btnIniciar" layoutX="259.0" layoutY="303.0" mnemonicParsing="false" text="INICIAR" />
    </children>
 </AnchorPane>
