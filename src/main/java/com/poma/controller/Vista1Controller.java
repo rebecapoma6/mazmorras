@@ -34,6 +34,9 @@ public class Vista1Controller {
     @FXML
     public void initialize(){
 
+        String rutaImg = "/imagen/fondoMazmorra.png";
+        rootVista1.setStyle("-fx-background-image: url('" + getClass().getResource(rutaImg) + "'); -fx-background-size: cover;");
+
         //Recoger datos del jugador
         //Para recoger los datos del jugador en la primera vista se debe declaras las variables con sus atributos
         //luego se iguala al id que hemos puesto en el Scene Builder de cada campo de texto y se llama al metodo get.Text();
