@@ -5,17 +5,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootVista1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poma.controller.Vista1Controller">
+<AnchorPane fx:id="rootVista1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="Vista1" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poma.controller.Vista1Controller">
    <children>
-      <Label layoutX="244.0" layoutY="43.0" text="Nuevo Jugador" />
-      <TextField fx:id="txtNombre" layoutX="210.0" layoutY="88.0" promptText="Nombre" />
-      <TextField fx:id="txtPuntosVida" layoutX="210.0" layoutY="135.0" promptText="Puntos de vida" />
-      <TextField fx:id="txtDefensa" layoutX="210.0" layoutY="187.0" promptText="Defensa" />
-      <Label layoutX="126.0" layoutY="92.0" text="Nombre" />
-      <Label layoutX="116.0" layoutY="139.0" text="Puntos de vida" />
-      <Label layoutX="134.0" layoutY="192.0" text="Defensa" />
-      <Label layoutX="133.0" layoutY="239.0" text="Fuerza" />
-      <TextField fx:id="txtFuerza" layoutX="210.0" layoutY="235.0" promptText="Fuerza" />
-      <Button fx:id="btnIniciar" layoutX="259.0" layoutY="303.0" mnemonicParsing="false" text="INICIAR" />
+      <Label fx:id="newJg" layoutX="445.0" layoutY="38.0" text="Nuevo Jugador" />
+      <TextField fx:id="txtNombre" layoutX="428.0" layoutY="78.0" promptText="Nombre" />
+      <TextField fx:id="txtPuntosVida" layoutX="428.0" layoutY="125.0" promptText="Puntos de vida" />
+      <TextField fx:id="txtDefensa" layoutX="428.0" layoutY="165.0" promptText="Defensa" />
+      <Label layoutX="300.0" layoutY="78.0" text="Nombre" />
+      <Label layoutX="300.0" layoutY="125.0" text="Puntos de vida" />
+      <Label layoutX="299.0" layoutY="165.0" text="Defensa" />
+      <Label layoutX="300.0" layoutY="212.0" text="Fuerza" />
+      <TextField fx:id="txtFuerza" layoutX="428.0" layoutY="212.0" promptText="Fuerza" />
+      <Button fx:id="btnIniciar" layoutX="476.0" layoutY="265.0" mnemonicParsing="false" text="INICIAR" />
    </children>
 </AnchorPane>
