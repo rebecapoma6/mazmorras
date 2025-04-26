@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class Vista1Controller {
+
+    
+
     @FXML
     private TextField txtNombre;
 
