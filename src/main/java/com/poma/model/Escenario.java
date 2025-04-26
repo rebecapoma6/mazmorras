@@ -9,78 +9,67 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Escenario {
-    private Celda [][] mapa;
+    private Celda[][] mapa;
 
-    public Escenario(String rutaRelativa)throws IOException{
+    public Escenario(String rutaRelativa) throws IOException {
         leerDesdeArchivo(rutaRelativa);
     }
 
-    // public Escenario(){
-    //     leerDesdeArchivo();
-    // }
-
     private void leerDesdeArchivo(String path) throws IOException {
-        // InputStream is = getClass().getClassLoader().getResourceAsStream("com/poma/data/mapa.txt");
-        // if (is == null) {
-        //     throw new IOException("Archivo no encontrado: " + path);
-        // }
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("com/poma/data/mapas.txt");
+if (inputStream == null) {
+    throw new IOException("No se pudo encontrar el archivo: com/poma/data/mapas.txt");
+}
 
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(path),StandardCharsets.UTF_8))){
-            
-            
-            
-            List<String> lineas = new ArrayList<>();            
-            
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            List<String> lineas = new ArrayList<>();
             String linea;
+
             while ((linea = br.readLine()) != null) {
-                // System.out.println(linea); 
                 lineas.add(linea);
             }
 
             int filas = lineas.size();
             int columnas = lineas.get(0).length();
-
-
             mapa = new Celda[filas][columnas];
-            for(int y = 0; y < filas;y++){
+
+            for (int y = 0; y < filas; y++) {
                 String fila = lineas.get(y);
-                for(int x = 0; x < columnas; x++){
-                    char simbolos = fila.charAt(x);
+                for (int x = 0; x < columnas; x++) {
+                    char simbolo = fila.charAt(x);
 
                     TipoCelda tipo;
-                    switch (simbolos){
-                        case '.': 
-                        tipo = TipoCelda.SUELO;
-                        break;
-                        case '#': 
-                        tipo = TipoCelda.PARED;
-                        break;
+                    switch (simbolo) {
+                        case '.':
+                            tipo = TipoCelda.SUELO;
+                            break;
+                        case '#':
+                            tipo = TipoCelda.PARED;
+                            break;
                         default:
-                         throw new IllegalArgumentException("Simbolo no reconocido " + simbolos);
+                            throw new IllegalArgumentException("Símbolo no reconocido: " + simbolo);
                     }
+
                     mapa[y][x] = new Celda(tipo);
                 }
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
-            throw new IOException("Error leyendo el mapa: " + e.getMessage(),e);
+            throw new IOException("Error leyendo el mapa: " + e.getMessage(), e);
         }
     }
 
-    public Celda getCelda(int fila, int columna){
-        return mapa [fila][columna];
+    public Celda getCelda(int fila, int columna) {
+        return mapa[fila][columna];
     }
 
-    public int getAlto(){
+    public int getAlto() {
         return mapa.length;
     }
 
-    public int getAncho(){
+    public int getAncho() {
         return mapa[0].length;
     }
-
-
 
 }

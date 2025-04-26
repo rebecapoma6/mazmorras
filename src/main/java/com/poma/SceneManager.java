@@ -63,7 +63,7 @@ public class SceneManager {
     }
 
     /**
-     * Esto metodo hasScene sirve para verificar si una escena ya está cargada antes de intentar mostrarla o manipularla.
+     * Esto metod sirve para verificar si una escena ya está cargada antes de intentar mostrarla o manipularla.
      * @param id
      * @return
      */

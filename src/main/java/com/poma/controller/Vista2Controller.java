@@ -40,7 +40,9 @@ public class Vista2Controller {
         }
 
         try {
-            Escenario escenario = new Escenario("com/poma/data/mapa.txt");
+            Escenario escenario = new Escenario("com/poma/data/mapas.txt");
+            System.out.println("Ancho: " + escenario.getAncho() + ", Alto: " + escenario.getAlto()); // <-- DEBUG
+
             EscenarioView vista = new EscenarioView(escenario);
             containerMapa.getChildren().add(vista.getVista());
         } catch (Exception e) {
