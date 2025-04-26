@@ -4,7 +4,7 @@ public class Celda {
     private TipoCelda tipo;
     private boolean ocupado;
 
-    private Celda(TipoCelda tipo){
+    public Celda(TipoCelda tipo){
         this.tipo = tipo;
         this.ocupado = false;
     }

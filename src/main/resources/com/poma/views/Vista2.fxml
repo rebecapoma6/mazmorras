@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?import javafx.scene.layout.AnchorPane?>
 
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poma.Vista2Controller" />
 =======
+=======
+>>>>>>> origin/Dev_Rebeca
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poma.controller.Vista2Controller">
    <children>
-      <Label fx:id="label" text="Label" />
-      <GridPane fx:id="containerMapa">
+      <Label fx:id="label" text="VAMOS A JUGAR" />
+      <GridPane fx:id="containerMapa" style="-fx-border-color: red; -fx-background-color: lightgray;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -29,4 +31,7 @@
       </GridPane>
    </children>
 </VBox>
+<<<<<<< HEAD
 >>>>>>> origin/Dev_Diego
+=======
+>>>>>>> origin/Dev_Rebeca
