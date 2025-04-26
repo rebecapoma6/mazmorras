@@ -7,6 +7,7 @@ import com.poma.model.Protagonista;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class Vista1Controller {
 
@@ -26,6 +27,9 @@ public class Vista1Controller {
 
     @FXML
     private Button btnIniciar;
+
+    @FXML
+    private AnchorPane rootVista1;
 
     @FXML
     public void initialize(){
