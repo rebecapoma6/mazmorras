@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class EscenarioView {
-    private static final int MAPA_SIZE = 40;
+    private static final int MAPA_SIZE = 50;
     private final GridPane gridPane;
 
     public EscenarioView(Escenario escenario){

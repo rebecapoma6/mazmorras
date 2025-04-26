@@ -7,6 +7,7 @@ import com.poma.model.Protagonista;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class Vista1Controller {
 
@@ -28,7 +29,13 @@ public class Vista1Controller {
     private Button btnIniciar;
 
     @FXML
+    private AnchorPane rootVista1;
+
+    @FXML
     public void initialize(){
+
+        String rutaImg = "/imagen/fondoMazmorra.png";
+        rootVista1.setStyle("-fx-background-image: url('" + getClass().getResource(rutaImg) + "'); -fx-background-size: cover;");
 
         //Recoger datos del jugador
         //Para recoger los datos del jugador en la primera vista se debe declaras las variables con sus atributos

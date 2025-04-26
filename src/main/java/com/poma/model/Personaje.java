@@ -78,6 +78,15 @@ abstract class Personaje {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Personaje [nombre=" + nombre + ", puntosVida=" + puntosVida + ", defensa=" + defensa + ", fuerza="
+                + fuerza + ", danio=" + danio + "]";
+    }
+
+    
+
+
         
     }
 

@@ -16,9 +16,9 @@ public class Escenario {
     }
 
     private void leerDesdeArchivo(String path) throws IOException {
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("com/poma/data/mapas.txt");
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("/dataUrl/mapas.txt");
 if (inputStream == null) {
-    throw new IOException("No se pudo encontrar el archivo: com/poma/data/mapas.txt");
+    throw new IOException("No se pudo encontrar el archivo: /dataUrl/mapas.txt");
 }
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
