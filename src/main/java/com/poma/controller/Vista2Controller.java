@@ -1,10 +1,15 @@
 package com.poma.controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import com.poma.model.Escenario;
 import com.poma.model.EscenarioView;
 import com.poma.model.Protagonista;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class Vista2Controller {
@@ -14,6 +19,9 @@ public class Vista2Controller {
 
     @FXML
     private GridPane containerMapa;
+
+   
+   
 
 
     public void setProtagonista(Protagonista protagonista){
@@ -30,8 +38,12 @@ public class Vista2Controller {
         // }else{
         //     System.out.println("Protagonista no ha sido inicializado.");
         // }
+        
+        
        
     }
+
+
 
     private void reproduce(){
         if (protagonista != null) {

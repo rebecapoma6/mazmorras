@@ -37,6 +37,8 @@ public class Vista1Controller {
         String rutaImg = "/imagen/fondoMazmorra.png";
         rootVista1.setStyle("-fx-background-image: url('" + getClass().getResource(rutaImg) + "'); -fx-background-size: cover;");
 
+        //stage.getIcons().add(new Image(App.class.getResource("images/logo.png").toExternalForm()));
+
         //Recoger datos del jugador
         //Para recoger los datos del jugador en la primera vista se debe declaras las variables con sus atributos
         //luego se iguala al id que hemos puesto en el Scene Builder de cada campo de texto y se llama al metodo get.Text();

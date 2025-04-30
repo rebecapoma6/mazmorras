@@ -1,12 +1,16 @@
 package com.poma.model;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.poma.App;
 
 public class Escenario {
     private Celda[][] mapa;
@@ -16,12 +20,13 @@ public class Escenario {
     }
 
     private void leerDesdeArchivo(String path) throws IOException {
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("/dataUrl/mapas.txt");
-if (inputStream == null) {
-    throw new IOException("No se pudo encontrar el archivo: /dataUrl/mapas.txt");
-}
+        //InputStream inputStream = getClass().getClassLoader().getResourceAsStream("dataUrl/mapas.txt");
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+//if (inputStream == null) {
+   // throw new IOException("No se pudo encontrar el archivo: dataUrl/mapas.txt");
+//}
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(App.class.getResource("dataUrl/mapas.txt").toURI()))))) {
             List<String> lineas = new ArrayList<>();
             String linea;
 
