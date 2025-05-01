@@ -3,9 +3,7 @@ package com.poma.controller;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 import com.poma.model.LectorEscenario;
-import com.poma.model.EscenarioView;
 import com.poma.model.Protagonista;
 
 import javafx.fxml.FXML;
