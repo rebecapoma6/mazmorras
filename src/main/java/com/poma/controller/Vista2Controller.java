@@ -31,14 +31,7 @@ public class Vista2Controller {
 
     @FXML
     public void initialize(){
-        // if(protagonista !=null){
-        //     System.out.println("Nombre del protagonista " + protagonista.getNombre());
-        //     System.out.println("Puntos de vida: " + protagonista.getPuntosVida());
-
-        // }else{
-        //     System.out.println("Protagonista no ha sido inicializado.");
-        // }
-        
+    
         
        
     }
