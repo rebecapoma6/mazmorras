@@ -8,7 +8,7 @@ public class EscenarioView {
     private static final int MAPA_SIZE = 50;
     private final GridPane gridPane;
 
-    public EscenarioView(Escenario escenario){
+    public EscenarioView(LectorEscenario escenario){
         gridPane = new GridPane();
         reproducirEscenario(escenario);
     }
@@ -18,7 +18,7 @@ public class EscenarioView {
  * Metodo que me va a renderizar o reproducir visual el escenario en el gridpane
  * @param escenario
  */
-    private void reproducirEscenario(Escenario escenario){
+    private void reproducirEscenario(LectorEscenario escenario){
         gridPane.getChildren().clear();
 
 
@@ -54,7 +54,7 @@ public class EscenarioView {
      * Metodo para actualizar el mapa su ha cambiado
      * @param newEscenario
      */
-    public void actulizarVista(Escenario newEscenario){
+    public void actulizarVista(LectorEscenario newEscenario){
         reproducirEscenario(newEscenario);
     }
 

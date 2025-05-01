@@ -12,10 +12,10 @@ import java.util.List;
 
 import com.poma.App;
 
-public class Escenario {
+public class LectorEscenario {
     private Celda[][] mapa;
 
-    public Escenario(String rutaRelativa) throws IOException {
+    public LectorEscenario(String rutaRelativa) throws IOException {
         leerDesdeArchivo(rutaRelativa);
     }
 
