@@ -18,18 +18,20 @@ public class LectorEscenario {
     }
 
     private void leerDesdeArchivo(String path) throws IOException {
-        //InputStream inputStream = getClass().getClassLoader().getResourceAsStream("dataUrl/mapas.txt");
-
-//if (inputStream == null) {
-   // throw new IOException("No se pudo encontrar el archivo: dataUrl/mapas.txt");
-//}
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(App.class.getResource("dataUrl/mapas.txt").toURI()))))) {
+       
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                new FileInputStream(new File(App.class.getResource("dataUrl/mapas.txt").toURI()))))) {
             List<String> lineas = new ArrayList<>();
             String linea;
 
             while ((linea = br.readLine()) != null) {
                 lineas.add(linea);
+            }
+
+            lineas.removeIf(l -> l.trim().isEmpty());
+
+            if (lineas.isEmpty()) {
+                throw new IOException("El archivo del mapa está vacío o solo contiene líneas en blanco.");
             }
 
             int filas = lineas.size();
@@ -38,6 +40,11 @@ public class LectorEscenario {
 
             for (int y = 0; y < filas; y++) {
                 String fila = lineas.get(y);
+
+                if (fila.length() != columnas) {
+                    throw new IOException("Las líneas del mapa no tienen el mismo largo. Línea " + y
+                            + " tiene longitud " + fila.length());
+                }
                 for (int x = 0; x < columnas; x++) {
                     char simbolo = fila.charAt(x);
 
