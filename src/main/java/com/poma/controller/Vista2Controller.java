@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import com.poma.model.Escenario;
+import com.poma.model.LectorEscenario;
 import com.poma.model.EscenarioView;
 import com.poma.model.Protagonista;
 
@@ -52,7 +52,7 @@ public class Vista2Controller {
         }
 
         try {
-            Escenario escenario = new Escenario(" /dataUrl/mapas.txt");
+            LectorEscenario escenario = new LectorEscenario(" /dataUrl/mapas.txt");
             System.out.println("Ancho: " + escenario.getAncho() + ", Alto: " + escenario.getAlto()); // <-- DEBUG
 
             EscenarioView vista = new EscenarioView(escenario);
