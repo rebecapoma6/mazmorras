@@ -7,6 +7,7 @@ import com.poma.model.LectorEscenario;
 import com.poma.interfaces.Observer;
 import com.poma.model.Celda;
 import com.poma.model.Protagonista;
+import com.poma.model.TipoCelda;
 
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -52,7 +53,7 @@ public class Vista2Controller implements Observer {
             // EscenarioView vista = new EscenarioView(escenario);
             // containerMapa.getChildren().add(vista.getVista());
 
-            LectorEscenario lectorEscenario = new LectorEscenario("dataUrl/mapas.txt");
+            LectorEscenario lectorEscenario = new LectorEscenario("/dataUrl/mapas.txt");
 
             mainGridPane = new GridPane();
             mainGridPane.setPadding(new Insets(10));
@@ -78,8 +79,10 @@ public class Vista2Controller implements Observer {
                     // Si el protagonista existe y su posición coincide con la celda actual (fila,
                     // col)
                     if (protagonista != null && f == protagonista.getFila() && c == protagonista.getColumna()) {
+
                         label.setText("P"); // aqui ponemos P , porq luego cargamos la img de protagonista suponemos
                         label.setTextFill(Color.GREEN);
+
                         // Si no está el protagonista, simplemente se muetra la celda que se crea aqui
                         // en el switch
                     } else {
@@ -97,7 +100,7 @@ public class Vista2Controller implements Observer {
                         }
                     }
                     label.setFont(Font.font("Consolas", 18));
-                    mainGridPane.add(label, f, c);
+                    mainGridPane.add(label, c, f);//He cambiado la posicion de f,c a c,f para que el mapa.txt aparezca tal cual segun el 
                 }
             }
 
