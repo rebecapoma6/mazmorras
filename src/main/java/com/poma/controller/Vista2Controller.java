@@ -98,7 +98,7 @@ public class Vista2Controller implements Observer {
                         }
                     }
                     label.setFont(Font.font("Consolas", 18));
-                    mainGridPane.add(label, f, c);
+                    mainGridPane.add(label, c, f);
                 }
             }
 

@@ -34,7 +34,7 @@ public class Vista1Controller {
     @FXML
     public void initialize() {
 
-        String rutaImg = "/imagen/fondoMazmorra.png";
+        String rutaImg = "/com/poma/imagen/fondoMazmorra.png";
         rootVista1.setStyle(
                 "-fx-background-image: url('" + getClass().getResource(rutaImg) + "'); -fx-background-size: cover;");
 
