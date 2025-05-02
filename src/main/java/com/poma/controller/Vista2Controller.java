@@ -8,6 +8,7 @@ import com.poma.model.LectorEscenario;
 import com.poma.interfaces.Observer;
 import com.poma.model.Celda;
 import com.poma.model.Protagonista;
+import com.poma.model.TipoCelda;
 
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -19,6 +20,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class Vista2Controller implements Observer {
     // Recibir el objeto Protagonista
@@ -29,6 +34,15 @@ public class Vista2Controller implements Observer {
 
     private GridPane mainGridPane;
 
+    private static final int TAMANO_CELDA = 30; // Tamaño de cada celda del mapa
+
+    private ImageView protagonistaImageView; // Imagen del protagonista
+
+   /**
+     * Este método se llama desde la vista anterior para recibir el protagonista
+     * y luego llama a reproduce() para mostrarlo en el mapa.
+     * @param protagonista
+     */
     public void setProtagonista(Protagonista protagonista) {
         this.protagonista = protagonista;
         reproduce();
@@ -37,6 +51,75 @@ public class Vista2Controller implements Observer {
     @FXML
     public void initialize() {
 
+        // Cargar la imagen del protagonista
+
+        Image protagonistaImage = new Image(getClass().getResourceAsStream("/imagen/protagonista.gif")); // Ruta de la
+                                                                                                         // imagen
+        if (protagonistaImage.isError()) {
+            System.err.println("Error al cargar la imagen del protagonista.");
+        }
+
+        // Cuando se carga la vista, se carga la imagen del protagonista y se ajusta a
+        // un tamaño adecuado.
+
+        protagonistaImageView = new ImageView(protagonistaImage);
+        protagonistaImageView.setFitWidth(TAMANO_CELDA);
+        protagonistaImageView.setFitHeight(TAMANO_CELDA);
+
+    }
+
+    private void manejarMovimiento(KeyEvent event) {
+
+        //Detecta la tecla pulsada y calcula la nueva posición del protagonista.
+        //Llama a esPosicionValida para ver si puede moverse ahí.
+        //Si es válido, actualiza la posición y redibuja el mapa.
+
+        int nuevaFila = protagonista.getFila();
+        int nuevaColumna = protagonista.getColumna();
+
+        // Cambia la fila o columna según la tecla pulsada
+        if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
+            nuevaFila--; // Mover hacia arriba
+
+        } else if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
+            nuevaFila++; // Mover hacia abajo
+
+        } else if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) {
+            nuevaColumna--; // Mover hacia la izquierda
+
+        } else if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
+            nuevaColumna++; // Mover hacia la derecha
+        }
+
+
+        // Comprueba si la nueva posición es válida (no es pared ni está fuera del mapa)
+        if (esPosicionValida(nuevaFila, nuevaColumna)) {
+            protagonista.setPosicion(nuevaFila, nuevaColumna);
+            reproduce(); // Redibuja el mapa con el protagonista en la nueva posición
+        }
+    }
+
+    private boolean esPosicionValida(int fila, int columna) {
+        // Evita que el protagonista salga del mapa o entre en una pared (#).
+        // Muestra en consola el tipo de celda a la que se quiere mover (útil para depurar).
+       
+
+        try {
+            LectorEscenario lector = new LectorEscenario("/dataUrl/mapas.txt");
+            // Comprueba que la posición esté dentro del mapa
+            if (fila < 0 || fila >= lector.getAlto() || columna < 0 || columna >= lector.getAncho()) {
+                return false;
+            }
+
+            // Comprobar si la celda es una pared
+            Celda celda = lector.getCelda(fila, columna);
+            System.out.println("Celda actual: " + celda.getTipo());
+            return celda.getTipo() != TipoCelda.PARED;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private void reproduce() {
