@@ -7,8 +7,10 @@ public class Protagonista extends Personaje {
 
     
 
-    public Protagonista(String nombre, int defensa, int fuerza, int danio, int puntosVida){
+    public Protagonista(String nombre, int defensa, int fuerza, int danio, int puntosVida, int fila, int columa){
         super(nombre, defensa, fuerza, danio, puntosVida);
+        this.fila = fila;
+        this.columna = columa;
 
         
 
