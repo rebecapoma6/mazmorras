@@ -3,7 +3,6 @@ package com.poma.controller;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 import com.poma.model.LectorEscenario;
 import com.poma.interfaces.Observer;
 import com.poma.model.Celda;
@@ -30,9 +29,9 @@ public class Vista2Controller implements Observer {
     private Protagonista protagonista;
 
     @FXML
-    private VBox root;
+    private VBox root;// Contenedor principal de la vista
 
-    private GridPane mainGridPane;
+    private GridPane mainGridPane;// La cuadricula donde se dibuja el mapa
 
     private static final int TAMANO_CELDA = 30; // Tamaño de cada celda del mapa
 
@@ -49,12 +48,16 @@ public class Vista2Controller implements Observer {
         reproduce();
     }
 
+
+
+
+
     @FXML
     public void initialize() {
 
         // Cargar la imagen del protagonista
 
-        Image protagonistaImage = new Image(getClass().getResourceAsStream("/imagen/protagonista.gif")); // Ruta de la
+        Image protagonistaImage = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista.gif")); // Ruta de la
                                                                                                          // imagen
         if (protagonistaImage.isError()) {
             System.err.println("Error al cargar la imagen del protagonista.");
@@ -68,6 +71,9 @@ public class Vista2Controller implements Observer {
         protagonistaImageView.setFitHeight(TAMANO_CELDA);
 
     }
+
+
+
 
     private void manejarMovimiento(KeyEvent event) {
 
@@ -99,6 +105,11 @@ public class Vista2Controller implements Observer {
         }
     }
 
+
+
+
+
+
     private boolean esPosicionValida(int fila, int columna) {
         // Evita que el protagonista salga del mapa o entre en una pared (#).
         // Muestra en consola el tipo de celda a la que se quiere mover (útil para
@@ -122,21 +133,25 @@ public class Vista2Controller implements Observer {
         }
     }
 
+
+
+
+
     private void reproduce() {
+        // Reconstruye el mapa cada vez que el protagonista se mueve.
+        // Dibuja la imagen del protagonista en su posición actual.
+        // El resto de celdas se dibujan como suelo (.) o pared (#).
+        // Después de redibujar, el GridPane vuelve a escuchar el teclado y se le da el
+        // foco para que puedas seguir moviendo al protagonista.
+
         if (protagonista != null) {
             System.out.println("Nombre del protagonista " + protagonista.getNombre());
             System.out.println("Puntos de vida: " + protagonista.getPuntosVida());
         }
 
         try {
-            // LectorEscenario escenario = new LectorEscenario(" /dataUrl/mapas.txt");
-            // System.out.println("Ancho: " + escenario.getAncho() + ", Alto: " +
-            // escenario.getAlto()); // <-- DEBUG
 
-            // EscenarioView vista = new EscenarioView(escenario);
-            // containerMapa.getChildren().add(vista.getVista());
-
-            LectorEscenario lectorEscenario = new LectorEscenario("dataUrl/mapas.txt");
+            LectorEscenario lectorEscenario = new LectorEscenario("/dataUrl/mapas.txt");
 
             mainGridPane = new GridPane();
             mainGridPane.setPadding(new Insets(10));
@@ -145,6 +160,7 @@ public class Vista2Controller implements Observer {
             int columnas = lectorEscenario.getAncho();
             double porcentaje = 100.0 / columnas;
 
+            // Configura las columnas del GridPane
             for (int i = 0; i < columnas; i++) {
                 ColumnConstraints col = new ColumnConstraints();
                 col.setPercentWidth(porcentaje);
@@ -153,20 +169,20 @@ public class Vista2Controller implements Observer {
                 mainGridPane.getColumnConstraints().add(col);
             }
 
+            // Dibuja cada celda del mapa
             for (int f = 0; f < filas; f++) {
                 for (int c = 0; c < columnas; c++) {
                     Celda celda = lectorEscenario.getCelda(f, c);
-                    Label label = new Label();
 
-                    // Si la posición es la del protagonista, lo dibujamos allí
-                    // Si el protagonista existe y su posición coincide con la celda actual (fila,
-                    // col)
+                    // Si la celda es la del protagonista, muestra la imagen
                     if (protagonista != null && f == protagonista.getFila() && c == protagonista.getColumna()) {
-                        label.setText("P"); // aqui ponemos P , porq luego cargamos la img de protagonista suponemos
-                        label.setTextFill(Color.GREEN);
+
+                        mainGridPane.add(protagonistaImageView, c, f); // Agregar el ImageView del protagonista
+
                         // Si no está el protagonista, simplemente se muetra la celda que se crea aqui
                         // en el switch
                     } else {
+                        Label label = new Label();
                         switch (celda.getTipo()) {
                             case SUELO:
                                 label.setText(".");
@@ -179,19 +195,31 @@ public class Vista2Controller implements Observer {
                             // default:
                             // break;
                         }
+
+                        label.setFont(Font.font("Consolas", 18));
+                        mainGridPane.add(label, c, f);// He cambiado la posicion de f,c a c,f para que el mapa.txt
+                                                      // aparezca tal cual segun el
                     }
-                    label.setFont(Font.font("Consolas", 18));
-                    mainGridPane.add(label, c, f);
                 }
             }
 
+            // Limpia la vista y añade el nuevo mapa
             root.getChildren().clear();
             root.getChildren().add(mainGridPane);
+
+            // Aquí es donde se asegura que el GridPane escuche el teclado
+            mainGridPane.setOnKeyPressed(event -> manejarMovimiento(event));
+            mainGridPane.requestFocus(); // Asegurarse de que el VBox tenga el foco
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+
+
+    
 
     @Override
     public void onChange() {
