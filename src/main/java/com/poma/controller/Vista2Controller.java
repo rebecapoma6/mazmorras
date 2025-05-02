@@ -38,9 +38,10 @@ public class Vista2Controller implements Observer {
 
     private ImageView protagonistaImageView; // Imagen del protagonista
 
-   /**
+    /**
      * Este método se llama desde la vista anterior para recibir el protagonista
      * y luego llama a reproduce() para mostrarlo en el mapa.
+     * 
      * @param protagonista
      */
     public void setProtagonista(Protagonista protagonista) {
@@ -70,9 +71,9 @@ public class Vista2Controller implements Observer {
 
     private void manejarMovimiento(KeyEvent event) {
 
-        //Detecta la tecla pulsada y calcula la nueva posición del protagonista.
-        //Llama a esPosicionValida para ver si puede moverse ahí.
-        //Si es válido, actualiza la posición y redibuja el mapa.
+        // Detecta la tecla pulsada y calcula la nueva posición del protagonista.
+        // Llama a esPosicionValida para ver si puede moverse ahí.
+        // Si es válido, actualiza la posición y redibuja el mapa.
 
         int nuevaFila = protagonista.getFila();
         int nuevaColumna = protagonista.getColumna();
@@ -91,7 +92,6 @@ public class Vista2Controller implements Observer {
             nuevaColumna++; // Mover hacia la derecha
         }
 
-
         // Comprueba si la nueva posición es válida (no es pared ni está fuera del mapa)
         if (esPosicionValida(nuevaFila, nuevaColumna)) {
             protagonista.setPosicion(nuevaFila, nuevaColumna);
@@ -101,8 +101,8 @@ public class Vista2Controller implements Observer {
 
     private boolean esPosicionValida(int fila, int columna) {
         // Evita que el protagonista salga del mapa o entre en una pared (#).
-        // Muestra en consola el tipo de celda a la que se quiere mover (útil para depurar).
-       
+        // Muestra en consola el tipo de celda a la que se quiere mover (útil para
+        // depurar).
 
         try {
             LectorEscenario lector = new LectorEscenario("/dataUrl/mapas.txt");
