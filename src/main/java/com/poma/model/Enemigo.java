@@ -1,14 +1,25 @@
 package com.poma.model;
 
 public class Enemigo extends Personaje {
-    int percepcion;
+    private int velocidad;
+    private int percepcion;
 
-    Enemigo(String nombre, int defensa, int fuerza, int danio, int puntosVida, int percepcion) {
-
-        super(nombre, defensa, fuerza, danio, puntosVida);
-
+    public Enemigo(String nombre, int x, int y, int puntosVida, int fuerza, int defensa, int velocidad, int percepcion) {
+        super(nombre, defensa, fuerza, 0, puntosVida);
+        this.velocidad = velocidad;
         this.percepcion = percepcion;
+        this.fila = y;
+        this.columna = x;
 
+
+    }
+
+    public int getVelocidad() {
+        return this.velocidad;
+    }
+
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
     }
 
     public int getPercepcion() {
@@ -18,5 +29,14 @@ public class Enemigo extends Personaje {
     public void setPercepcion(int percepcion) {
         this.percepcion = percepcion;
     }
+
+
+    @Override
+    public String toString() {
+        return "Enemigo [nombre=" + nombre + ", vida=" + puntosVida + ", pos=(" + fila + "," + columna + "), fuerza=" + fuerza +
+                ", defensa=" + defensa + ", velocidad=" + velocidad + ", percepcion=" + percepcion + "]";
+    }
+
+
 
 }

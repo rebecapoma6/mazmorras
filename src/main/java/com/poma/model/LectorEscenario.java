@@ -20,7 +20,7 @@ public class LectorEscenario {
     private void leerDesdeArchivo(String path) throws IOException {
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream(new File(App.class.getResource("dataUrl/mapas.txt").toURI()))))) {
+            new FileInputStream(new File(App.class.getResource("dataUrl/mapas.txt").toURI()))))) {
             List<String> lineas = new ArrayList<>();
             String linea;
 
