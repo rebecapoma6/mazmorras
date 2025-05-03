@@ -26,8 +26,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class Vista2Controller implements Observer {
-    // Recibir el objeto Protagonista
-    private Protagonista protagonista;
 
     @FXML
     private VBox root;// Contenedor principal de la vista
@@ -39,8 +37,9 @@ public class Vista2Controller implements Observer {
     private ImageView protagonistaImageView; // Imagen del protagonista
 
     /**
-     * Este método se llama desde la vista anterior para recibir el protagonista
-     * y luego llama a reproduce() para mostrarlo en el mapa.
+     * El método setProtagonista tiene como objetivo recibir un objeto Protagonista desde otra clase 
+     * (probablemente desde Vista1Controller o el SceneManager) y
+     *  realizar dos acciones principales:
      * 
      * @param protagonista
      */
@@ -48,15 +47,6 @@ public class Vista2Controller implements Observer {
         Proveedor.getInstance().setProtagonista(protagonista);
         reproduce();
     }
-
-
-    // public void setProtagonista(Protagonista protagonista) {
-       
-    //     this.protagonista = protagonista;
-    //     reproduce();
-    // }
-
-
 
 
 
@@ -85,6 +75,7 @@ public class Vista2Controller implements Observer {
 
     private void manejarMovimiento(KeyEvent event) {
 
+        Protagonista protagonista = Proveedor.getInstance().getProtagonista();
         // Detecta la tecla pulsada y calcula la nueva posición del protagonista.
         // Llama a esPosicionValida para ver si puede moverse ahí.
         // Si es válido, actualiza la posición y redibuja el mapa.
@@ -152,6 +143,7 @@ public class Vista2Controller implements Observer {
         // Después de redibujar, el GridPane vuelve a escuchar el teclado y se le da el
         // foco para que puedas seguir moviendo al protagonista.
 
+        Protagonista protagonista = Proveedor.getInstance().getProtagonista();
         if (protagonista != null) {
             System.out.println("Nombre del protagonista " + protagonista.getNombre());
             System.out.println("Puntos de vida: " + protagonista.getPuntosVida());

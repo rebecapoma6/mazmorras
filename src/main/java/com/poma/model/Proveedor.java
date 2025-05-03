@@ -2,7 +2,7 @@ package com.poma.model;
 
 
 /**
- * El Proveedor podria ser un Singleton q establece una única instancia de Protagonista,
+ * El Proveedor podria ser un Singleton q establece una única instancia de Protagonista,gestorEnemigo
 asegurando acceso global en la aplicación,
 facilitando la gestión de recursos sin duplicación,
 promoviendo consistencia y simplificando la interacción,
@@ -14,7 +14,7 @@ public class Proveedor {
     private Protagonista protagonista;
 
     private Proveedor(){
-        
+    
     }
 
     public static Proveedor getInstance(){
@@ -24,11 +24,13 @@ public class Proveedor {
         return instance;
     }
 
+    public void setProtagonista(Protagonista protagonista){
+        this.protagonista = protagonista;
+    }
+
     public Protagonista getProtagonista(){
         return protagonista;
     }
 
-    public void setProtagonista(Protagonista protagonista){
-        this.protagonista = protagonista;
-    }
+   
 }

@@ -47,7 +47,7 @@ public class SceneManager {
 
     public void loadScene(SceneId sceneID, Protagonista protagonista) {
         this.protagonista = protagonista;
-        if (scenes.containsKey(sceneID)){
+        if (scenes.containsKey(sceneID)){            
             stage.setScene(scenes.get(sceneID)); // Establece la escena en la ventana principal
             stage.show(); // Muestra la ventana con la nueva escena
         }
