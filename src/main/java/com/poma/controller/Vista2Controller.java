@@ -7,6 +7,7 @@ import com.poma.model.LectorEscenario;
 import com.poma.interfaces.Observer;
 import com.poma.model.Celda;
 import com.poma.model.Protagonista;
+import com.poma.model.Proveedor;
 import com.poma.model.TipoCelda;
 
 import javafx.fxml.FXML;
@@ -43,10 +44,17 @@ public class Vista2Controller implements Observer {
      * 
      * @param protagonista
      */
-    public void setProtagonista(Protagonista protagonista) {
-        this.protagonista = protagonista;
+    public void setProtagonista(Protagonista protagonista){
+        Proveedor.getInstance().setProtagonista(protagonista);
         reproduce();
     }
+
+
+    // public void setProtagonista(Protagonista protagonista) {
+       
+    //     this.protagonista = protagonista;
+    //     reproduce();
+    // }
 
 
 
