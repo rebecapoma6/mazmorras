@@ -4,6 +4,7 @@ import com.poma.SceneId;
 import com.poma.SceneManager;
 import com.poma.model.LectorEscenario;
 import com.poma.model.Protagonista;
+import com.poma.model.Proveedor;
 import com.poma.model.TipoCelda;
 
 import javafx.fxml.FXML;
@@ -85,6 +86,10 @@ public class Vista1Controller {
                 // Crea un objeto Protagonista con los datos del usuario y la posición inicial
                 // encontrada en el mapa.
                 Protagonista protagonista = new Protagonista(nombre, defensa, fuerza, danio, puntosVida, fila, columna);
+                
+                // Guardar el protagonista en el Proveedor para acceso global
+                Proveedor.getInstance().setProtagonista(protagonista);
+                
                 // Pasar el protagonista a la siguiente vista
                 SceneManager.getInstance().loadScene(SceneId.VISTA2, protagonista);
 

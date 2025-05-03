@@ -7,6 +7,7 @@ import com.poma.model.LectorEscenario;
 import com.poma.interfaces.Observer;
 import com.poma.model.Celda;
 import com.poma.model.Protagonista;
+import com.poma.model.Proveedor;
 import com.poma.model.TipoCelda;
 
 import javafx.fxml.FXML;
@@ -26,7 +27,11 @@ import javafx.scene.input.KeyEvent;
 
 public class Vista2Controller implements Observer {
     // Recibir el objeto Protagonista
-    private Protagonista protagonista;
+  
+    private Image protagonistaArriba;
+    private Image protagonistaAbajo;
+    private Image protagonistaIzquierda;
+    private Image protagonistaDerecha;
 
     @FXML
     private VBox root;// Contenedor principal de la vista
@@ -38,37 +43,50 @@ public class Vista2Controller implements Observer {
     private ImageView protagonistaImageView; // Imagen del protagonista
 
     /**
-     * Este método se llama desde la vista anterior para recibir el protagonista
-     * y luego llama a reproduce() para mostrarlo en el mapa.
+     * El método setProtagonista tiene como objetivo recibir un objeto Protagonista desde otra clase 
+     * (probablemente desde Vista1Controller o el SceneManager) y
+     *  realizar dos acciones principales:
      * 
      * @param protagonista
      */
-    public void setProtagonista(Protagonista protagonista) {
-        this.protagonista = protagonista;
+    public void setProtagonista(Protagonista protagonista){
+        Proveedor.getInstance().setProtagonista(protagonista);
         reproduce();
     }
-
-
 
 
 
     @FXML
     public void initialize() {
 
-        // Cargar la imagen del protagonista
+        
 
-        Image protagonistaImage = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista.gif")); // Ruta de la
-                                                                                                         // imagen
-        if (protagonistaImage.isError()) {
+       //carga las imagenes para el protagonista
+
+       protagonistaArriba = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_arriba.png"));
+       protagonistaAbajo = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_abajo.png"));
+       protagonistaIzquierda = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_izquierda.png"));
+       protagonistaDerecha = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_derecha.png")); 
+
+
+       //MENSAJE SI NO SE CARGA LA IMAGEN DEL PROTAGONISTA
+                                                                                                         
+        if (protagonistaArriba.isError()) { 
             System.err.println("Error al cargar la imagen del protagonista.");
-        }
+        } else if (protagonistaAbajo.isError()){
+            System.err.println("Error al cargar la imagen del protagonista.");
+        }else if (protagonistaDerecha.isError()){
+            System.err.println("Error al cargar la imagen del protagonista.");
+        } else if (protagonistaIzquierda.isError()){
+                System.err.println("Error al cargar la imagen del protagonista.");
+            }
 
         // Cuando se carga la vista, se carga la imagen del protagonista y se ajusta a
         // un tamaño adecuado.
-
-        protagonistaImageView = new ImageView(protagonistaImage);
-        protagonistaImageView.setFitWidth(TAMANO_CELDA);
-        protagonistaImageView.setFitHeight(TAMANO_CELDA);
+        // Por defecto, muestra mirando abajo (o la que prefieras)
+            protagonistaImageView = new ImageView(protagonistaAbajo);
+            protagonistaImageView.setFitWidth(TAMANO_CELDA);
+            protagonistaImageView.setFitHeight(TAMANO_CELDA);
 
     }
 
@@ -77,6 +95,7 @@ public class Vista2Controller implements Observer {
 
     private void manejarMovimiento(KeyEvent event) {
 
+        Protagonista protagonista = Proveedor.getInstance().getProtagonista();
         // Detecta la tecla pulsada y calcula la nueva posición del protagonista.
         // Llama a esPosicionValida para ver si puede moverse ahí.
         // Si es válido, actualiza la posición y redibuja el mapa.
@@ -87,15 +106,19 @@ public class Vista2Controller implements Observer {
         // Cambia la fila o columna según la tecla pulsada
         if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
             nuevaFila--; // Mover hacia arriba
+            protagonistaImageView.setImage(protagonistaArriba); //En esta linea asocio la imagen que quiero a la tecla
 
         } else if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
             nuevaFila++; // Mover hacia abajo
+            protagonistaImageView.setImage(protagonistaAbajo); //En esta linea asocio la imagen que quiero a la tecla
 
         } else if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) {
             nuevaColumna--; // Mover hacia la izquierda
+            protagonistaImageView.setImage(protagonistaIzquierda); //En esta linea asocio la imagen que quiero a la tecla
 
         } else if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
             nuevaColumna++; // Mover hacia la derecha
+            protagonistaImageView.setImage(protagonistaDerecha); //En esta linea asocio la imagen que quiero a la tecla
         }
 
         // Comprueba si la nueva posición es válida (no es pared ni está fuera del mapa)
@@ -104,10 +127,6 @@ public class Vista2Controller implements Observer {
             reproduce(); // Redibuja el mapa con el protagonista en la nueva posición
         }
     }
-
-
-
-
 
 
     private boolean esPosicionValida(int fila, int columna) {
@@ -144,6 +163,7 @@ public class Vista2Controller implements Observer {
         // Después de redibujar, el GridPane vuelve a escuchar el teclado y se le da el
         // foco para que puedas seguir moviendo al protagonista.
 
+        Protagonista protagonista = Proveedor.getInstance().getProtagonista();
         if (protagonista != null) {
             System.out.println("Nombre del protagonista " + protagonista.getNombre());
             System.out.println("Puntos de vida: " + protagonista.getPuntosVida());
