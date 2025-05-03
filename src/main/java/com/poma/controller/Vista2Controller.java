@@ -59,12 +59,14 @@ public class Vista2Controller implements Observer {
     @FXML
     public void initialize() {
 
+        
+
        //carga las imagenes para el protagonista
 
-       protagonistaArriba = new Image(getClass().getResourceAsStream("/images/protagonista_arriba.png"));
-       protagonistaAbajo = new Image(getClass().getResourceAsStream("/images/protagonista_abajo.png"));
-       protagonistaIzquierda = new Image(getClass().getResourceAsStream("/images/protagonista_izquierda.png"));
-       protagonistaDerecha = new Image(getClass().getResourceAsStream("/images/protagonista_derecha.png")); 
+       protagonistaArriba = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_arriba.png"));
+       protagonistaAbajo = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_abajo.png"));
+       protagonistaIzquierda = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_izquierda.png"));
+       protagonistaDerecha = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_derecha.png")); 
 
 
        //MENSAJE SI NO SE CARGA LA IMAGEN DEL PROTAGONISTA
