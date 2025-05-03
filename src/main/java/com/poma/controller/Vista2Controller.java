@@ -26,7 +26,11 @@ import javafx.scene.input.KeyEvent;
 
 public class Vista2Controller implements Observer {
     // Recibir el objeto Protagonista
-    private Protagonista protagonista;
+    private Protagonista protagonista; // Personaje principal del juego
+    private Image protagonistaArriba;
+    private Image protagonistaAbajo;
+    private Image protagonistaIzquierda;
+    private Image protagonistaDerecha;
 
     @FXML
     private VBox root;// Contenedor principal de la vista
@@ -55,20 +59,32 @@ public class Vista2Controller implements Observer {
     @FXML
     public void initialize() {
 
-        // Cargar la imagen del protagonista
+       //carga las imagenes para el protagonista
 
-        Image protagonistaImage = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista.gif")); // Ruta de la
-                                                                                                         // imagen
-        if (protagonistaImage.isError()) {
+       protagonistaArriba = new Image(getClass().getResourceAsStream("/images/protagonista_arriba.png"));
+       protagonistaAbajo = new Image(getClass().getResourceAsStream("/images/protagonista_abajo.png"));
+       protagonistaIzquierda = new Image(getClass().getResourceAsStream("/images/protagonista_izquierda.png"));
+       protagonistaDerecha = new Image(getClass().getResourceAsStream("/images/protagonista_derecha.png")); 
+
+
+       //MENSAJE SI NO SE CARGA LA IMAGEN DEL PROTAGONISTA
+                                                                                                         
+        if (protagonistaArriba.isError()) { 
             System.err.println("Error al cargar la imagen del protagonista.");
-        }
+        } else if (protagonistaAbajo.isError()){
+            System.err.println("Error al cargar la imagen del protagonista.");
+        }else if (protagonistaDerecha.isError()){
+            System.err.println("Error al cargar la imagen del protagonista.");
+        } else if (protagonistaIzquierda.isError()){
+                System.err.println("Error al cargar la imagen del protagonista.");
+            }
 
         // Cuando se carga la vista, se carga la imagen del protagonista y se ajusta a
         // un tamaño adecuado.
-
-        protagonistaImageView = new ImageView(protagonistaImage);
-        protagonistaImageView.setFitWidth(TAMANO_CELDA);
-        protagonistaImageView.setFitHeight(TAMANO_CELDA);
+        // Por defecto, muestra mirando abajo (o la que prefieras)
+            protagonistaImageView = new ImageView(protagonistaAbajo);
+            protagonistaImageView.setFitWidth(TAMANO_CELDA);
+            protagonistaImageView.setFitHeight(TAMANO_CELDA);
 
     }
 
@@ -87,15 +103,19 @@ public class Vista2Controller implements Observer {
         // Cambia la fila o columna según la tecla pulsada
         if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
             nuevaFila--; // Mover hacia arriba
+            protagonistaImageView.setImage(protagonistaArriba); //En esta linea asocio la imagen que quiero a la tecla
 
         } else if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
             nuevaFila++; // Mover hacia abajo
+            protagonistaImageView.setImage(protagonistaAbajo); //En esta linea asocio la imagen que quiero a la tecla
 
         } else if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) {
             nuevaColumna--; // Mover hacia la izquierda
+            protagonistaImageView.setImage(protagonistaIzquierda); //En esta linea asocio la imagen que quiero a la tecla
 
         } else if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
             nuevaColumna++; // Mover hacia la derecha
+            protagonistaImageView.setImage(protagonistaDerecha); //En esta linea asocio la imagen que quiero a la tecla
         }
 
         // Comprueba si la nueva posición es válida (no es pared ni está fuera del mapa)
