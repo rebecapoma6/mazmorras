@@ -6,6 +6,8 @@ import java.io.IOException;
 import com.poma.model.LectorEscenario;
 import com.poma.interfaces.Observer;
 import com.poma.model.Celda;
+import com.poma.model.Enemigo;
+import com.poma.model.GestorEnemigo;
 import com.poma.model.Protagonista;
 import com.poma.model.Proveedor;
 import com.poma.model.TipoCelda;
@@ -42,6 +44,10 @@ public class Vista2Controller implements Observer {
 
     private ImageView protagonistaImageView; // Imagen del protagonista
 
+    private Image imgEnemigo; // Imagen para los enemigos
+    
+    
+    
     /**
      * El método setProtagonista tiene como objetivo recibir un objeto Protagonista desde otra clase 
      * (probablemente desde Vista1Controller o el SceneManager) y
@@ -67,6 +73,8 @@ public class Vista2Controller implements Observer {
        protagonistaAbajo = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_abajo.png"));
        protagonistaIzquierda = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_izquierda.png"));
        protagonistaDerecha = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_derecha.png")); 
+
+       imgEnemigo = new Image(getClass().getResourceAsStream("/com/poma/images/img5.jpeg"));
 
 
        //MENSAJE SI NO SE CARGA LA IMAGEN DEL PROTAGONISTA
@@ -164,14 +172,21 @@ public class Vista2Controller implements Observer {
         // foco para que puedas seguir moviendo al protagonista.
 
         Protagonista protagonista = Proveedor.getInstance().getProtagonista();
+        
         if (protagonista != null) {
             System.out.println("Nombre del protagonista " + protagonista.getNombre());
             System.out.println("Puntos de vida: " + protagonista.getPuntosVida());
+            System.out.println("Protagonista en fila: " + protagonista.getFila() + ", columna: " + protagonista.getColumna());
+            
         }
 
         try {
 
             LectorEscenario lectorEscenario = new LectorEscenario("/dataUrl/mapas.txt");
+            
+             // Obtén el gestor de enemigos desde el Proveedor
+            GestorEnemigo gestor = Proveedor.getInstance().getGestorEnemigo();
+            gestor.moverEnemigos(protagonista, lectorEscenario); // Movemos a los enemigos
 
             mainGridPane = new GridPane();
             mainGridPane.setPadding(new Insets(10));
@@ -221,6 +236,20 @@ public class Vista2Controller implements Observer {
                                                       // aparezca tal cual segun el
                     }
                 }
+            }
+
+            // Dibujamos los enemigos con sus imágenes
+            for (Enemigo enemigo : gestor.getEnemigos()) {
+                int f = enemigo.getFila();
+                int c = enemigo.getColumna();
+
+                  // Crearemos un ImageView para el enemigo
+                ImageView enemigoImageVer = new ImageView(imgEnemigo);
+                enemigoImageVer.setFitWidth(TAMANO_CELDA);
+                enemigoImageVer.setFitWidth(TAMANO_CELDA);
+
+                // Agregaremos la ImageView del enemigo al GridPane
+                mainGridPane.add(enemigoImageVer, c, f);
             }
 
             // Limpia la vista y añade el nuevo mapa

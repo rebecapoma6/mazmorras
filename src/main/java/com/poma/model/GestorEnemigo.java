@@ -12,7 +12,7 @@ public class GestorEnemigo {
 
     public GestorEnemigo() {
         enemigos = new ArrayList<>();
-        cargarEnemigos("dataUrl/enemigos.txt");
+        cargarEnemigos("/com/poma/dataUrl/enemigos.txt");
     }
 
     private void cargarEnemigos(String ruta) {
@@ -34,7 +34,7 @@ public class GestorEnemigo {
                 int velocidad = Integer.parseInt(partes[6]);
                 int percepcion = Integer.parseInt(partes[7]);
 
-                Enemigo enemigo = new Enemigo(tipo, y, x, vida, fuerza, defensa, velocidad, percepcion);
+                Enemigo enemigo = new Enemigo(tipo, x, y, vida, fuerza, defensa, velocidad, percepcion);
                 enemigos.add(enemigo);
             }
 
@@ -42,17 +42,13 @@ public class GestorEnemigo {
 
         }
 
-      
-
     }
 
-    public List<Enemigo> getEnemigos(){
+    public List<Enemigo> getEnemigos() {
         return enemigos;
     }
 
-
-
-    public void moverEnemigos(Protagonista protagonista, LectorEscenario escenario){
+    public void moverEnemigos(Protagonista protagonista, LectorEscenario escenario) {
 
         Random rm = new Random();
 
@@ -62,43 +58,54 @@ public class GestorEnemigo {
             int filaEnemigo = enemigo.getFila();
             int columEnemigo = enemigo.getColumna();
 
-            boolean cercaDelProta = (filaProta >= filaEnemigo - enemigo.getPercepcion() && filaProta <= filaEnemigo + enemigo.getPercepcion()) &&
-            (columProta >= columEnemigo - enemigo.getPercepcion() && columProta <= columEnemigo + enemigo.getPercepcion());
+            boolean cercaDelProta = (filaProta >= filaEnemigo - enemigo.getPercepcion()
+                    && filaProta <= filaEnemigo + enemigo.getPercepcion()) &&
+                    (columProta >= columEnemigo - enemigo.getPercepcion()
+                            && columProta <= columEnemigo + enemigo.getPercepcion());
 
             int nvaFila = filaEnemigo;
             int nvaColum = columEnemigo;
 
             if (cercaDelProta) {
-                 // Mover hacia el protagonista
+                // Mover hacia el protagonista
                 if (filaProta < filaEnemigo) {
-                    nvaFila --;  // Moverse hacia arriba
-                } else if( filaProta > filaEnemigo){
-                    nvaFila++;   // Moverse hacia abajo
+                    nvaFila--; // Moverse hacia arriba
+                } else if (filaProta > filaEnemigo) {
+                    nvaFila++; // Moverse hacia abajo
                 }
 
-
                 if (columProta < columEnemigo) {
-                    nvaColum--;  // Moverse a la izquierda
+                    nvaColum--; // Moverse a la izquierda
                 } else if (columProta > columEnemigo) {
-                    nvaColum++;  // Moverse a la derecha
+                    nvaColum++; // Moverse a la derecha
+                }
+
+                // Verificar que el enemigo no se mueva a la posición del protagonista
+                if (nvaFila == filaProta && nvaColum == columProta) {
+                    //System.out.println("¡El enemigo ha alcanzado al protagonista!");
+                    continue; // esto es ejemplo para q el enemigo no se mueva a la posición del protagonista
+                   //Luego Aquí vamos a agregar lógica para manejar el combate por ahora solo lo mostrara y pasara por encima del enemigo
                 }
 
             } else {
 
-                int [][] direcciones = { {1,0}, {-1,0}, {0,1}, {0,-1} };
-                int index = rm.nextInt(direcciones.length);  // Seleccionar un índice aleatorio
-
+                int[][] direcciones = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+                int index = rm.nextInt(direcciones.length); // Seleccionar un índice aleatorio
 
                 int f = filaEnemigo + direcciones[index][0];
                 int c = columEnemigo + direcciones[index][1];
 
-                if (f >= 0 && f < escenario.getAlto() &&  c >= 0 && c < escenario.getAncho()) {
-                    if (escenario.getCelda(f,c).getTipo() != TipoCelda.PARED) {
+                if (f >= 0 && f < escenario.getAlto() && c >= 0 && c < escenario.getAncho()) {
+                    if (escenario.getCelda(f, c).getTipo() != TipoCelda.PARED) {
+                        if (f == filaProta && c == columProta) {// Verificar que el enemigo no se mueva a la posición
+                                                                // del protagonista
+                            continue;// No mover al enemigo a la posición del protagonista
+                        }
                         nvaFila = f;
                         nvaColum = c;
-                    }                        
+                    }
                 }
-            }        
+            }
 
             enemigo.setPosicion(nvaFila, nvaColum);
 

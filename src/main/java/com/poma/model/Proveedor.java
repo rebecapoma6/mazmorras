@@ -33,7 +33,7 @@ public class Proveedor {
         return protagonista;
     }
 
-    public GestorEnemigo gestorEnemigo(){
+    public GestorEnemigo getGestorEnemigo(){
         return gestorEnemigo;
     }
 
