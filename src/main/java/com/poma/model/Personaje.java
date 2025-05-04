@@ -7,6 +7,8 @@ abstract class Personaje {
     protected int defensa;
     protected int fuerza;
     protected int danio;
+    protected int fila ;
+    protected int columna;
 
   
 
@@ -24,6 +26,22 @@ abstract class Personaje {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getFila() {
+        return this.fila;
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+    public int getColumna() {
+        return this.columna;
+    }
+
+    public void setColumna(int columna) {
+        this.columna = columna;
     }
 
     public int getPuntosVida() {
@@ -76,6 +94,12 @@ abstract class Personaje {
         }else{
             return false;
         }
+    }
+
+
+    public void setPosicion(int fila, int columna) {
+        this.fila = fila;
+        this.columna = columna;
     }
 
     @Override
