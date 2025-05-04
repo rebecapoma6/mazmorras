@@ -12,9 +12,10 @@ public class Proveedor {
     
     private static Proveedor instance;
     private Protagonista protagonista;
+    private GestorEnemigo gestorEnemigo;
 
     private Proveedor(){
-    
+        gestorEnemigo = new GestorEnemigo();
     }
 
     public static Proveedor getInstance(){
@@ -30,6 +31,10 @@ public class Proveedor {
 
     public Protagonista getProtagonista(){
         return protagonista;
+    }
+
+    public GestorEnemigo getGestorEnemigo(){
+        return gestorEnemigo;
     }
 
    
