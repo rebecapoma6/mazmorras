@@ -51,10 +51,12 @@ public class GestorEnemigo {
     public void moverEnemigos(Protagonista protagonista, LectorEscenario escenario) {
 
         Random rm = new Random();
+        
+        int filaProta = protagonista.getFila();
+        int columProta = protagonista.getColumna();
 
         for (Enemigo enemigo : enemigos) {
-            int filaProta = protagonista.getFila();
-            int columProta = protagonista.getColumna();
+           
             int filaEnemigo = enemigo.getFila();
             int columEnemigo = enemigo.getColumna();
 
