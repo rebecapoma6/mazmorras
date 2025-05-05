@@ -17,5 +17,6 @@
       <Label layoutX="300.0" layoutY="212.0" text="Fuerza" />
       <TextField fx:id="txtFuerza" layoutX="428.0" layoutY="212.0" promptText="Fuerza" />
       <Button fx:id="btnIniciar" layoutX="476.0" layoutY="265.0" mnemonicParsing="false" text="INICIAR" />
+      <Label layoutX="181.0" layoutY="25.0" text="¡Tienes 30 puntos para repartir!" />
    </children>
 </AnchorPane>
