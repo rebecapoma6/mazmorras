@@ -42,6 +42,9 @@ public class GestorEnemigo {
 
         }
 
+ System.out.println("Total enemigos cargados: " + enemigos.size());
+
+
     }
 
     public List<Enemigo> getEnemigos() {

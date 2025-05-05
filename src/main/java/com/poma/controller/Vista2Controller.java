@@ -44,9 +44,9 @@ public class Vista2Controller implements Observer {
 
     private GridPane mainGridPane;// La cuadricula donde se dibuja el mapa
 
-    private static final int ANCHO_CELDA = 50; // Tamaño de ancho de la celda del mapa
+    private static final int ANCHO_CELDA = 60; // Tamaño de ancho de la celda del mapa
 
-    private static final int ALTO_CELDA = 50; //Tamaño de alto de la celda
+    private static final int ALTO_CELDA = 60; //Tamaño de alto de la celda
 
     private ImageView protagonistaImageView; // Imagen del protagonista
 
@@ -265,14 +265,13 @@ public class Vista2Controller implements Observer {
             for (Enemigo enemigo : gestor.getEnemigos()) {
                 int f = enemigo.getFila();
                 int c = enemigo.getColumna();
-
-                // Crearemos un ImageView para el enemigo
-                ImageView enemigoImageVer = new ImageView(imgEnemigo);
-                enemigoImageVer.setFitWidth(ANCHO_CELDA);
-                enemigoImageVer.setFitWidth(ALTO_CELDA);
-
-                // Agregaremos la ImageView del enemigo al GridPane
-                mainGridPane.add(enemigoImageVer, c, f);
+                 // aqui nos aseguramos que el enemigo esté dentro de los límites del grid
+                if (f >= 0 && f < filas && c >= 0 && c < columnas  ) {
+                    ImageView enemigoImagenVer = new ImageView(imgEnemigo);
+                    enemigoImagenVer.setFitWidth(ANCHO_CELDA);
+                    enemigoImagenVer.setFitHeight(ALTO_CELDA);
+                    mainGridPane.add(enemigoImagenVer, c,f);
+                } 
             }
 
             

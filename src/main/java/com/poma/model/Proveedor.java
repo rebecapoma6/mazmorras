@@ -17,6 +17,7 @@ public class Proveedor {
     private Proveedor(){
         gestorEnemigo = new GestorEnemigo();
     }
+    
 
     public static Proveedor getInstance(){
         if (instance == null) {
