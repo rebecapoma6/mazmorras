@@ -35,7 +35,15 @@ public class Vista2Controller implements Observer {
     private Image protagonistaAbajo;
     private Image protagonistaIzquierda;
     private Image protagonistaDerecha;
-    private Image imgEnemigo; // Imagen para los enemigos
+
+    private Image enemigoArriba;
+    private Image enemigoAbajo;
+    private Image enemigoIzquierda;
+    private Image enemigoDerecha;
+
+
+
+    
     private Image imgSuelo;// Imagen para representar el suelo
     private Image imgPared;// Imagen para representar la pared
 
@@ -44,11 +52,13 @@ public class Vista2Controller implements Observer {
 
     private GridPane mainGridPane;// La cuadricula donde se dibuja el mapa
 
-    private static final int ANCHO_CELDA = 50; // Tamaño de ancho de la celda del mapa
+    private static final int ANCHO_CELDA = 60; // Tamaño de ancho de la celda del mapa
 
-    private static final int ALTO_CELDA = 50; //Tamaño de alto de la celda
+    private static final int ALTO_CELDA = 60; //Tamaño de alto de la celda
 
     private ImageView protagonistaImageView; // Imagen del protagonista
+
+    private ImageView enemigoImageView; //Imagen del enemigo
 
     
     
@@ -82,7 +92,11 @@ public class Vista2Controller implements Observer {
        protagonistaIzquierda = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_izquierda.png"));
        protagonistaDerecha = new Image(getClass().getResourceAsStream("/com/poma/images/protagonista_derecha.png")); 
 
-       imgEnemigo = new Image(getClass().getResourceAsStream("/com/poma/images/img5.jpeg"));
+       enemigoArriba = new Image(getClass().getResourceAsStream("/com/poma/images/zombito_arriba.png"));
+       enemigoAbajo = new Image(getClass().getResourceAsStream("/com/poma/images/zombito_abajo.png"));
+       enemigoIzquierda = new Image(getClass().getResourceAsStream("/com/poma/images/zombito_izquierda.png"));
+       enemigoDerecha = new Image(getClass().getResourceAsStream("/com/poma/images/zombito_derecha.png"));
+
        imgSuelo = new Image(getClass().getResourceAsStream("/com/poma/images/suelo.jpg"));
        imgPared = new Image(getClass().getResourceAsStream("/com/poma/images/pared.jpg"));
 
@@ -95,6 +109,10 @@ public class Vista2Controller implements Observer {
         protagonistaImageView = new ImageView(protagonistaAbajo);
         protagonistaImageView.setFitWidth(ANCHO_CELDA);
         protagonistaImageView.setFitHeight(ALTO_CELDA);
+
+        enemigoImageView = new ImageView(enemigoIzquierda);
+        enemigoImageView.setFitWidth(ANCHO_CELDA);
+        enemigoImageView.setFitHeight(ALTO_CELDA);
 
 
     }
@@ -113,8 +131,9 @@ public class Vista2Controller implements Observer {
         if (imgPared.isError()) {
             System.err.println("Error al cargar la imagen de la pared.");
         }
-        if (imgEnemigo.isError()) {
-            System.err.println("Error al cargar la imagen del enemigo.");
+        if (enemigoArriba.isError() || enemigoAbajo.isError() ||
+        enemigoDerecha.isError() || enemigoIzquierda.isError()) {
+    System.err.println("Error al cargar la imagen del protagonista.");
         }
     }
 
@@ -267,7 +286,7 @@ public class Vista2Controller implements Observer {
                 int c = enemigo.getColumna();
 
                 // Crearemos un ImageView para el enemigo
-                ImageView enemigoImageVer = new ImageView(imgEnemigo);
+                ImageView enemigoImageVer = new ImageView(enemigoAbajo);
                 enemigoImageVer.setFitWidth(ANCHO_CELDA);
                 enemigoImageVer.setFitWidth(ALTO_CELDA);
 
