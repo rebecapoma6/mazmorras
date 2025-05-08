@@ -3,6 +3,7 @@ package com.poma.model;
 public class Enemigo extends Personaje {
     private int velocidad;
     private int percepcion;
+    private Direccion direccion;
 
     public Enemigo(String tipo, int x, int y, int vida, int fuerza, int defensa, int velocidad, int percepcion) {
         super(tipo, defensa, fuerza, 0, vida);
@@ -10,6 +11,7 @@ public class Enemigo extends Personaje {
         this.percepcion = percepcion;
         this.fila = y;
         this.columna = x;
+        this.direccion = direccion != null ? direccion : Direccion.ABAJO; 
 
 
     }
@@ -28,6 +30,14 @@ public class Enemigo extends Personaje {
 
     public void setPercepcion(int percepcion) {
         this.percepcion = percepcion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
     }
 
 

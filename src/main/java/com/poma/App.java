@@ -22,7 +22,7 @@ public class App extends Application {
 
         sceneManager.setScene(SceneId.VISTABIENVENIDA,"VistaBienvenida");
         sceneManager.setScene(SceneId.VISTA1,"Vista1");
-        sceneManager.setScene(SceneId.VISTA2,"Vista2");
+        //sceneManager.setScene(SceneId.VISTA2,"Vista2");
 
         sceneManager.init(stage);
         sceneManager.loadScene(SceneId.VISTABIENVENIDA);
