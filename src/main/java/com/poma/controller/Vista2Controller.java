@@ -129,7 +129,7 @@ public class Vista2Controller implements Observer {
             default:
                 return; 
         }    
-        // Delegar la lógica de movimiento al modelo
+        // delega la lógica de movimiento al modelo motorJuego
         motorJuego.moverProtagonista(nuevaFila, nuevaColumna);
         actualizarVista();
     }
@@ -197,7 +197,7 @@ public class Vista2Controller implements Observer {
                 System.err.println("Enemigo sin dirección asignada en la posición: (" + enemigo.getFila() + ", "
                         + enemigo.getColumna() + ")");
                 // Asigna una dirección por defecto si es necesario
-                enemigo.setDireccion(Direccion.ABAJO);  // O cualquier dirección válida
+                enemigo.setDireccion(Direccion.ABAJO); 
             }
             ImageView enemigoView = new ImageView(enemigoAbajo);
             enemigoView.setFitWidth(60);
