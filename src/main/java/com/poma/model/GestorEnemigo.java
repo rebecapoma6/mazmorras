@@ -184,6 +184,13 @@ public class GestorEnemigo {
             && escenario.getCelda(fila, columna).getTipo() != TipoCelda.PARED
             && !posicionesOcupadasEnemigo.contains(fila + "," + columna);
     }
+
+
+
+     public void eliminarEnemigo(Enemigo enemigo){
+        enemigos.remove(enemigo);
+        System.out.println(enemigo.getNombre() + " eliminado del gestor. Total enemigos: " + enemigos.size());
+    }
 }
 
     

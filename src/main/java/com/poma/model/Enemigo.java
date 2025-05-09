@@ -11,7 +11,7 @@ public class Enemigo extends Personaje {
         this.percepcion = percepcion;
         this.fila = y;
         this.columna = x;
-        this.direccion = direccion != null ? direccion : Direccion.ABAJO; 
+        this.direccion = Direccion.ABAJO; 
 
 
     }

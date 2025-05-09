@@ -8,10 +8,14 @@ import com.poma.model.Protagonista;
 import com.poma.model.Proveedor;
 import com.poma.interfaces.Observer;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -32,6 +36,7 @@ public class Vista2Controller implements Observer {
     private GridPane mainGridPane;
     private MotorJuego motorJuego;
     private Protagonista protagonista;
+    private VBox datosJugador;
 
     public void setProtagonista(Protagonista protagonista) {
         this.protagonista = protagonista;
@@ -84,7 +89,26 @@ public class Vista2Controller implements Observer {
             rowConstraints.setMaxHeight(60);  // Establece la altura máxima
             mainGridPane.getRowConstraints().add(rowConstraints);
         }
-            root.getChildren().add(mainGridPane);
+
+
+        // VBox con estadísticas del protagonista
+            datosJugador = new VBox(10); // Espacio vertical entre los label
+            datosJugador.setPadding(new Insets(10));
+            actualizarDatosJugador();
+
+        
+
+        
+
+
+
+
+
+
+
+
+
+            root.getChildren().addAll(mainGridPane, datosJugador);
 
             actualizarVista();
             mainGridPane.setOnMouseClicked(event -> {
@@ -95,7 +119,45 @@ public class Vista2Controller implements Observer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
+
+
+
+
+
+//---------------------------------------------------------------------------//
+    private void actualizarDatosJugador() {
+    datosJugador.getChildren().clear();
+
+    if (protagonista != null) {
+        Label lblNombre = new Label("Nombre del protagonista: " + protagonista.getNombre());
+        Label lblVida = new Label("Puntos de vida: " + protagonista.getPuntosVida());
+        Label lblDefensa = new Label("Defensa: " + protagonista.getDefensa());
+        Label lblFuerza = new Label("Fuerza: " + protagonista.getFuerza());
+        Label lblPosicion = new Label("Protagonista en fila: " + protagonista.getFila() + ", columna: " + protagonista.getColumna());
+
+        Font fuente = Font.font("Arial", 20);
+        lblNombre.setFont(fuente);
+        lblVida.setFont(fuente);
+        lblDefensa.setFont(fuente);
+        lblFuerza.setFont(fuente);
+        lblPosicion.setFont(fuente);
+
+        datosJugador.getChildren().addAll(lblNombre, lblVida, lblDefensa, lblFuerza, lblPosicion);
+    }
+}
+
+//------------------------------------------------------------------------------------//
+
+
+
+
+
+
+
+
 
     private void manejarMovimiento(KeyEvent event) {
         System.out.println("Tecla presionada: " + event.getCode()); 
@@ -128,15 +190,21 @@ public class Vista2Controller implements Observer {
 
             default:
                 return; 
-        }    
-        // delega la lógica de movimiento al modelo motorJuego
+        } 
+
         motorJuego.moverProtagonista(nuevaFila, nuevaColumna);
-        actualizarVista();
+
+       
     }
 
 
+
+
+
+
+
+
     private void actualizarVista() {
-          System.out.println("Actualizando vista...");
      if (motorJuego == null || protagonista == null || mainGridPane == null) {
          System.err.println("Vista no puede actualizarse: motorJuego, protagonista o mainGridPane son null.");
          return;
@@ -166,6 +234,8 @@ public class Vista2Controller implements Observer {
             mainGridPane.add(celdaImageView, columna, fila);
         }
     }
+
+
         // Dibujar al protagonista
         Image imgProta;
         switch (protagonista.getDireccion()) {
@@ -191,6 +261,8 @@ public class Vista2Controller implements Observer {
         protagonistaView.setFitHeight(60);
         mainGridPane.add(protagonistaView, protagonista.getColumna(), protagonista.getFila());
 
+
+        
         // Dibujar a los enemigos
         motorJuego.getGestorEnemigo().getEnemigos().forEach(enemigo -> {
             if (enemigo.getDireccion() == null) {
@@ -205,6 +277,11 @@ public class Vista2Controller implements Observer {
             mainGridPane.add(enemigoView, enemigo.getColumna(), enemigo.getFila());
 
         });
+
+
+
+    // Actualiza las estadísticas del protagonista
+        actualizarDatosJugador();
 
     }
 

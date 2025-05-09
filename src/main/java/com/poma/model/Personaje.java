@@ -2,22 +2,21 @@ package com.poma.model;
 
 abstract class Personaje {
     
-    protected String nombre;
+   protected String nombre;
     protected int puntosVida;
     protected int defensa;
     protected int fuerza;
-    protected int danio;
     protected int fila ;
     protected int columna;
 
   
 
-    Personaje(String nombre, int defensa, int fuerza, int danio, int puntosVida){
+    Personaje(String nombre, int defensa, int fuerza, int fila, int vida){
         this.nombre = nombre;
         this.defensa = defensa;
         this.fuerza = fuerza;
-        this.danio = danio;
-        this.puntosVida = puntosVida;
+        this.fila = fila;
+        this.puntosVida = vida;
     }
 
     public String getNombre() {
@@ -68,32 +67,30 @@ abstract class Personaje {
         this.fuerza = fuerza;
     }
 
-    public int getDanio() {
-        return danio;
-    }
+    // public int getDanio() {
+    //     return danio;
+    // }
 
-    public void setDanio(int danio) {
-        this.danio = danio;
-    }
+    // public void setDanio(int danio) {
+    //     this.danio = danio;
+    // }
 
     public void CalcularPuntosVida(int danio) {
-        int danioReal = danio - defensa;
-        if (danioReal < 0) {
-            danioReal = 0; // Si el daño es menor que 0, se convierte en 0
-        }
+        int danioReal = Math.max(danio - defensa, 0); // asegura que el daño no sea negativo
         puntosVida -= danioReal; // Resta el daño real de los puntos de vida
+        
         if (puntosVida < 0) {
             puntosVida = 0; // Asegura que los puntos de vida no sean negativos
         }
     }
 
     public boolean estaVivo(){ //por ejemplo para cuando un enemigo muere... si su vida se queda a cero... "vivo" retorna a falso
-        boolean vivo = true;
-        if(puntosVida > 0){
-            return vivo;
-        }else{
-            return false;
-        }
+         return puntosVida > 0;
+    }
+
+     public int calcularDanio(){
+
+        return fuerza;
     }
 
 
@@ -105,7 +102,7 @@ abstract class Personaje {
     @Override
     public String toString() {
         return "Personaje [nombre=" + nombre + ", puntosVida=" + puntosVida + ", defensa=" + defensa + ", fuerza="
-                + fuerza + ", danio=" + danio + "]";
+                + fuerza + ", ]";
     }
 
     
