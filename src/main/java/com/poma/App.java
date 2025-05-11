@@ -1,5 +1,5 @@
-
 package com.poma;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +14,7 @@ import java.io.IOException;
  * Ronic Leal
  */
 public class App extends Application {
+
 
     @Override
     public void start(Stage stage) {
