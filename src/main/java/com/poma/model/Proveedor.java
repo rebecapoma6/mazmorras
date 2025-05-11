@@ -1,6 +1,4 @@
 package com.poma.model;
-
-
 /**
  * El Proveedor podria ser un Singleton q establece una única instancia de Protagonista,gestorEnemigo
 asegurando acceso global en la aplicación,

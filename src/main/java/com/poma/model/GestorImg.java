@@ -28,10 +28,7 @@ public class GestorImg {
     public static final String PROTA_IZQUIERDA = "/com/poma/images/protagonista_izquierda.png";
     public static final String PROTA_DERECHA = "/com/poma/images/protagonista_derecha.png";
 
-    public static final String ENE_ARRIBA = "/com/poma/images/zombito_arriba.png";
     public static final String ENE_ABAJO = "/com/poma/images/zombito_abajo.png";
-    public static final String ENE_IZQUIERDA = "/com/poma/images/zombito_izquierda.png";
-    public static final String ENE_DERECHA = "/com/poma/images/zombito_derecha.png";
 
     public static final String SUELO = "/com/poma/images/suelo.jpg";
     public static final String PARED = "/com/poma/images/pared.jpg";

@@ -1,3 +1,4 @@
+
 package com.poma;
 
 import javafx.application.Application;
@@ -9,8 +10,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * JavaFX App
+/**@author
+ * Rebeca Poma
+ * Diego Guerrero
+ * Ronic Leal
  */
 public class App extends Application {
 

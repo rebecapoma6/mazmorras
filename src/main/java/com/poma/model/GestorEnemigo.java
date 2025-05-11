@@ -1,5 +1,4 @@
 package com.poma.model;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -164,19 +163,7 @@ public class GestorEnemigo {
         }
     }
 
-
-            //COMENTO ESTO PARA QUE FUNCIONE LO DE LA PARED
-
-            // // Actualizar la posición del enemigo si es válida
-            // if (!posicionesOcupadasEnemigo.contains(nvaFila + "," + nvaColum)) {
-            //     posicionesOcupadasEnemigo.remove(filaEnemigo + "," + columEnemigo); // Eliminar la posición anterior
-            //     posicionesOcupadasEnemigo.add(nvaFila + "," + nvaColum); // Registrar la nueva posición
-            //     enemigo.setPosicion(nvaFila, nvaColum);
-            // }
-
-        
-
-        //*******************paredes */
+        //********paredes************//
     private boolean esCeldaTransitable(int fila, int columna, LectorEscenario escenario, Set<String> posicionesOcupadasEnemigo) {
         return fila >= 0 && fila < escenario.getAlto()
             && columna >= 0 && columna < escenario.getAncho()

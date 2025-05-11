@@ -64,8 +64,8 @@ public class Vista2Controller implements Observer {
             protagonistaAbajo = GestorImg.getImagen(GestorImg.PROTA_ABAJO);
             protagonistaIzquierda = GestorImg.getImagen(GestorImg.PROTA_IZQUIERDA);
             protagonistaDerecha = GestorImg.getImagen(GestorImg.PROTA_DERECHA);
-            //IMAGEN POR DEFECTO DE ENEMIGO
-            enemigoAbajo = GestorImg.getImagen(GestorImg.ENE_ABAJO);           
+            // IMAGEN POR DEFECTO DE ENEMIGO
+            enemigoAbajo = GestorImg.getImagen(GestorImg.ENE_ABAJO);
 
             imgSuelo = GestorImg.getImagen(GestorImg.SUELO);
             imgPared = GestorImg.getImagen(GestorImg.PARED);
@@ -73,37 +73,27 @@ public class Vista2Controller implements Observer {
             motorJuego.addObserver(this);
             mainGridPane = new GridPane();
 
-               // Establecer el tamaño de las celdas
-        for (int i = 0; i < motorJuego.getMapa().getAncho(); i++) {
-            ColumnConstraints columnConstraints = new ColumnConstraints();
-            columnConstraints.setMinWidth(60);  // Establece el ancho mínimo de cada columna
-            columnConstraints.setPrefWidth(60);  // Establece el ancho preferido
-            columnConstraints.setMaxWidth(60);  // Establece el ancho máximo
-            mainGridPane.getColumnConstraints().add(columnConstraints);
-        }
+            // Establecer el tamaño de las celdas
+            for (int i = 0; i < motorJuego.getMapa().getAncho(); i++) {
+                ColumnConstraints columnConstraints = new ColumnConstraints();
+                columnConstraints.setMinWidth(60); // Establece el ancho mínimo de cada columna
+                columnConstraints.setPrefWidth(60); // Establece el ancho preferido
+                columnConstraints.setMaxWidth(60); // Establece el ancho máximo
+                mainGridPane.getColumnConstraints().add(columnConstraints);
+            }
 
-        for (int i = 0; i < motorJuego.getMapa().getAlto(); i++) {
-            RowConstraints rowConstraints = new RowConstraints();
-            rowConstraints.setMinHeight(60);  // Establece la altura mínima de cada fila
-            rowConstraints.setPrefHeight(60);  // Establece la altura preferida
-            rowConstraints.setMaxHeight(60);  // Establece la altura máxima
-            mainGridPane.getRowConstraints().add(rowConstraints);
-        }
+            for (int i = 0; i < motorJuego.getMapa().getAlto(); i++) {
+                RowConstraints rowConstraints = new RowConstraints();
+                rowConstraints.setMinHeight(60); // Establece la altura mínima de cada fila
+                rowConstraints.setPrefHeight(60); // Establece la altura preferida
+                rowConstraints.setMaxHeight(60); // Establece la altura máxima
+                mainGridPane.getRowConstraints().add(rowConstraints);
+            }
 
-
-        // VBox con estadísticas del protagonista
+            // VBox con estadísticas del protagonista
             datosJugador = new VBox(10); // Espacio vertical entre los label
             datosJugador.setPadding(new Insets(10));
             actualizarDatosJugador();
-        
-
-
-
-
-
-
-
-
 
             root.getChildren().addAll(mainGridPane, datosJugador);
 
@@ -117,121 +107,93 @@ public class Vista2Controller implements Observer {
             e.printStackTrace();
         }
 
-
     }
 
-
-
-
-
-//---------------------------------------------------------------------------//
     private void actualizarDatosJugador() {
-    datosJugador.getChildren().clear();
+        datosJugador.getChildren().clear();
 
-    if (protagonista != null) {
-        Label lblNombre = new Label("Nombre del protagonista: " + protagonista.getNombre());
-        Label lblVida = new Label("Puntos de vida: " + protagonista.getPuntosVida());
-        Label lblDefensa = new Label("Defensa: " + protagonista.getDefensa());
-        Label lblFuerza = new Label("Fuerza: " + protagonista.getFuerza());
-        Label lblPosicion = new Label("Protagonista en fila: " + protagonista.getFila() + ", columna: " + protagonista.getColumna());
+        if (protagonista != null) {
+            Label lblNombre = new Label("Nombre del protagonista: " + protagonista.getNombre());
+            Label lblVida = new Label("Puntos de vida: " + protagonista.getPuntosVida());
+            Label lblDefensa = new Label("Defensa: " + protagonista.getDefensa());
+            Label lblFuerza = new Label("Fuerza: " + protagonista.getFuerza());
+            Label lblPosicion = new Label(
+                    "Protagonista en fila: " + protagonista.getFila() + ", columna: " + protagonista.getColumna());
 
-        Font fuente = Font.font("Arial", 20);
-        lblNombre.setFont(fuente);
-        lblVida.setFont(fuente);
-        lblDefensa.setFont(fuente);
-        lblFuerza.setFont(fuente);
-        lblPosicion.setFont(fuente);
+            Font fuente = Font.font("Arial", 20);
+            lblNombre.setFont(fuente);
+            lblVida.setFont(fuente);
+            lblDefensa.setFont(fuente);
+            lblFuerza.setFont(fuente);
+            lblPosicion.setFont(fuente);
 
-        datosJugador.getChildren().addAll(lblNombre, lblVida, lblDefensa, lblFuerza, lblPosicion);
+            datosJugador.getChildren().addAll(lblNombre, lblVida, lblDefensa, lblFuerza, lblPosicion);
+        }
     }
-}
-
-//------------------------------------------------------------------------------------//
-
-
-
-
-
-
-
-
 
     private void manejarMovimiento(KeyEvent event) {
-        System.out.println("Tecla presionada: " + event.getCode()); 
+        System.out.println("Tecla presionada: " + event.getCode());
         int nuevaFila = protagonista.getFila();
         int nuevaColumna = protagonista.getColumna();
 
         switch (event.getCode()) {
             case UP:
                 nuevaFila--;
-       
-                
+
                 break;
             case DOWN:
                 nuevaFila++;
-            
-               
+
                 break;
 
             case LEFT:
                 nuevaColumna--;
-          
 
                 break;
 
             case RIGHT:
                 nuevaColumna++;
-          
 
                 break;
 
             default:
-                return; 
-        } 
+                return;
+        }
 
         motorJuego.moverProtagonista(nuevaFila, nuevaColumna);
 
-       
     }
 
-
-
-
-
-
-
-
     private void actualizarVista() {
-     if (motorJuego == null || protagonista == null || mainGridPane == null) {
-         System.err.println("Vista no puede actualizarse: motorJuego, protagonista o mainGridPane son null.");
-         return;
-     }
+        if (motorJuego == null || protagonista == null || mainGridPane == null) {
+            System.err.println("Vista no puede actualizarse: motorJuego, protagonista o mainGridPane son null.");
+            return;
+        }
 
         mainGridPane.getChildren().clear();
 
-    // Dibujar el mapa
-    for (int fila = 0; fila < motorJuego.getMapa().getAlto(); fila++) {
-        for (int columna = 0; columna < motorJuego.getMapa().getAncho(); columna++) {
-            Celda celda = motorJuego.getMapa().getCelda(fila, columna);
-            ImageView celdaImageView = null;
+        // Dibujar el mapa
+        for (int fila = 0; fila < motorJuego.getMapa().getAlto(); fila++) {
+            for (int columna = 0; columna < motorJuego.getMapa().getAncho(); columna++) {
+                Celda celda = motorJuego.getMapa().getCelda(fila, columna);
+                ImageView celdaImageView = null;
 
-            switch (celda.getTipo()) {
-                case SUELO:
-                    celdaImageView = new ImageView(imgSuelo);
-                    break;
-                case PARED:
-                    celdaImageView = new ImageView(imgPared);
-                    break;
-                default:
-                    continue;
+                switch (celda.getTipo()) {
+                    case SUELO:
+                        celdaImageView = new ImageView(imgSuelo);
+                        break;
+                    case PARED:
+                        celdaImageView = new ImageView(imgPared);
+                        break;
+                    default:
+                        continue;
+                }
+
+                celdaImageView.setFitWidth(60);
+                celdaImageView.setFitHeight(60);
+                mainGridPane.add(celdaImageView, columna, fila);
             }
-
-            celdaImageView.setFitWidth(60);
-            celdaImageView.setFitHeight(60);
-            mainGridPane.add(celdaImageView, columna, fila);
         }
-    }
-
 
         // Dibujar al protagonista
         Image imgProta;
@@ -258,15 +220,13 @@ public class Vista2Controller implements Observer {
         protagonistaView.setFitHeight(60);
         mainGridPane.add(protagonistaView, protagonista.getColumna(), protagonista.getFila());
 
-
-        
         // Dibujar a los enemigos
         motorJuego.getGestorEnemigo().getEnemigos().forEach(enemigo -> {
             if (enemigo.getDireccion() == null) {
                 System.err.println("Enemigo sin dirección asignada en la posición: (" + enemigo.getFila() + ", "
                         + enemigo.getColumna() + ")");
                 // Asigna una dirección por defecto si es necesario
-                enemigo.setDireccion(Direccion.ABAJO); 
+                enemigo.setDireccion(Direccion.ABAJO);
             }
             ImageView enemigoView = new ImageView(enemigoAbajo);
             enemigoView.setFitWidth(60);
@@ -275,9 +235,7 @@ public class Vista2Controller implements Observer {
 
         });
 
-
-
-    // Actualiza las estadísticas del protagonista
+        // Actualiza las estadísticas del protagonista
         actualizarDatosJugador();
 
     }
@@ -288,4 +246,3 @@ public class Vista2Controller implements Observer {
     }
 
 }
-
