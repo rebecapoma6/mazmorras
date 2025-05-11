@@ -57,7 +57,6 @@ public class GestorEnemigo {
      * únicos y permite búsquedas rápidas. En este caso, lo usamos para rastrear
      * las posiciones ocupadas por los enemigos en el mapa.
      * 
-     * 
      * @param protagonista
      * @param escenario
      */

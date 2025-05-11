@@ -75,22 +75,36 @@ abstract class Personaje {
     //     this.danio = danio;
     // }
 
+    /**
+     * @param danio es un parametro de entrada que se resta, de la defensa para obtener el daño real
+     * es lo que une entre puntos de vida y ataque (fuerza):Con el ataque se incrementa el numero de daños(guardado en daño real) 
+     * y asu vez se decrementa estos puntos a puntosVida
+     * si tenemos 15 de puntosVida , y 5 de defensa , y me atacan con 10 de fuerza , yo(protagonista) defenderia 5, pero los otros
+     * 5 se incrementan en puntosDanio q asu vez se restan de sus puntosVida, entonces nos quedaria 10 de puntosVida.
+     */
+
     public void CalcularPuntosVida(int danio) {
-        int danioReal = Math.max(danio - defensa, 0); // asegura que el daño no sea negativo
+        //int danioReal = Math.max(danio - defensa, 0); // asegura que el daño no sea negativo
+        int danioReal = (danio - defensa);
         puntosVida -= danioReal; // Resta el daño real de los puntos de vida
         
         if (puntosVida < 0) {
             puntosVida = 0; // Asegura que los puntos de vida no sean negativos
         }
     }
-
-    public boolean estaVivo(){ //por ejemplo para cuando un enemigo muere... si su vida se queda a cero... "vivo" retorna a falso
+    /**
+     * por ejemplo para cuando un enemigo muere... si su vida se queda a cero... "vivo" retorna a falso
+     * @return
+     */
+    public boolean estaVivo(){ 
          return puntosVida > 0;
     }
-
+    /**
+     * retorna fuerza porq es la forma en la q se calcula el daño , el cual esta relacionado con los puntos de vida
+     * @return
+     */
      public int calcularDanio(){
-
-        return fuerza;
+        return fuerza; 
     }
 
 

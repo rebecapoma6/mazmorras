@@ -95,9 +95,6 @@ public class Vista2Controller implements Observer {
             datosJugador = new VBox(10); // Espacio vertical entre los label
             datosJugador.setPadding(new Insets(10));
             actualizarDatosJugador();
-
-        
-
         
 
 

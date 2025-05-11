@@ -57,11 +57,6 @@ public class MotorJuego {
             } else if (nuevaColumna > columnaActual) {
                 protagonista.setDireccion(Direccion.DERECHA);
             }
-
-
-
-
-
             
 //---------------------------------------------------------------------//
         if(hayEnemigoEnPosicion(nuevaFila, nuevaColumna)){
@@ -176,7 +171,12 @@ public class MotorJuego {
 
 
 
-    
+    /**
+     * es para controlar que la posicion sea valida para el protagonista que su limite sea pared
+     * @param fila 
+     * @param columna
+     * @return
+     */
  
     private boolean esPosicionValida(int fila, int columna) {
 
@@ -185,6 +185,7 @@ public class MotorJuego {
             return false; // Fuera de los límites
         }
         Celda celda = mapa.getCelda(fila, columna);
+        //if (celda.getTipo() == TipoCelda.PARED && celda.getTipo() == TipoCelda.SUELO) 
         if (celda.getTipo() == TipoCelda.PARED) {
             System.out.println("Celda actual: " + celda.getTipo());
             return false; // Si la celda es una pared
