@@ -63,6 +63,8 @@ public class MotorJuego {
      */
     public void moverProtagonista(int nuevaFila, int nuevaColumna) {
         if (esPosicionValida(nuevaFila, nuevaColumna)) {
+            // Celda celda = mapa.getCelda(fila, columna);
+            //En caso que el protagonista se mueva a una posicion especifica para aumentar puntos de vida
             System.out.println("Nueva posición del protagonista: (" + nuevaFila + ", " + nuevaColumna + ")");
             int filaActual = protagonista.getFila();
             int columnaActual = protagonista.getColumna();
@@ -88,6 +90,7 @@ public class MotorJuego {
             }
 
         }
+
     }
 
     /**
