@@ -30,3 +30,26 @@
 .button:pressed {
     -fx-background-color: #2d2f45;
 }
+
+
+
+
+
+.datos-jugador {
+    -fx-background-color: linear-gradient(to bottom, #3a2e1c, #6e4b1f);
+    -fx-background-radius: 20;
+    -fx-border-color: #f6c453;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-padding: 18;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(gaussian, #000, 12, 0.3, 0, 3);
+}
+
+.datos-jugador-label {
+    -fx-font-family: "Papyrus", "Georgia", serif;
+    -fx-font-size: 22px;
+    -fx-text-fill: #ffe9b3;
+    -fx-padding: 8 0 8 0;
+    -fx-effect: dropshadow(gaussian, #3a2e1c, 2, 0.2, 0, 1);
+}

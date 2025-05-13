@@ -112,6 +112,10 @@ public class Vista2Controller implements Observer {
             datosJugador.setPadding(new Insets(10));
             actualizarDatosJugador();
 
+            root.getStylesheets().add(getClass().getResource("/com/poma/styles/style.css").toExternalForm());
+
+            root.setSpacing(30); // Espacio horizontal entre mainGridPane y datosJugador
+            
             root.getChildren().addAll(mainGridPane, datosJugador);
 
             actualizarVista();
@@ -140,12 +144,13 @@ public class Vista2Controller implements Observer {
             Label lblPosicion = new Label(
                     "Protagonista en fila: " + protagonista.getFila() + ", columna: " + protagonista.getColumna());
 
-            Font fuente = Font.font("Arial", 20);
-            lblNombre.setFont(fuente);
-            lblVida.setFont(fuente);
-            lblDefensa.setFont(fuente);
-            lblFuerza.setFont(fuente);
-            lblPosicion.setFont(fuente);
+            /** Estilos CSS */
+            datosJugador.getStyleClass().add("datos-jugador");
+            lblNombre.getStyleClass().add("datos-jugador-label");
+            lblVida.getStyleClass().add("datos-jugador-label");
+            lblDefensa.getStyleClass().add("datos-jugador-label");
+            lblFuerza.getStyleClass().add("datos-jugador-label");
+            lblPosicion.getStyleClass().add("datos-jugador-label");
 
             datosJugador.getChildren().addAll(lblNombre, lblVida, lblDefensa, lblFuerza, lblPosicion);
         }
