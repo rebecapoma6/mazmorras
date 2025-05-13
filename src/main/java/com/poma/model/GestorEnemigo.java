@@ -6,16 +6,25 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
+/**
+ * Clase encargada de gestionar la lista de enemigos en el juego, su carga, movimiento y eliminación.
+ */
 public class GestorEnemigo {
 
     private List<Enemigo> enemigos;
 
+/**
+ * Constructor. Inicializa la lista de enemigos y carga los enemigos desde el archivo especificado.
+ */
     public GestorEnemigo() {
         enemigos = new ArrayList<>();
         cargarEnemigos("/com/poma/dataUrl/enemigos.txt");
     }
 
+/**
+ * Carga los enemigos desde un archivo de texto y los añade a la lista de enemigos.
+ * @param ruta Ruta del archivo de texto con los datos de los enemigos.
+ */
     private void cargarEnemigos(String ruta) {
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(ruta)))) {
@@ -52,15 +61,17 @@ public class GestorEnemigo {
     }
 
     /**
+     * Mueve todos los enemigos en el escenario. Si el protagonista está dentro del rango de percepción
+     * de un enemigo, este intentará acercarse a él evitando paredes y otras posiciones ocupadas.
+     * Si no está cerca, el enemigo se moverá aleatoriamente a una celda transitable.
+     * 
      * Un HashSet es una estructura de datos que se utiliza para almacenar elementos
      * únicos y permite búsquedas rápidas. En este caso, lo usamos para rastrear
      * las posiciones ocupadas por los enemigos en el mapa.
      * 
-     * @param protagonista
-     * @param escenario
+     * @param protagonista El protagonista del juego.
+     * @param escenario El escenario del juego.
      */
-
-    //*HE AÑADIDO MODIFICACIONES PARA LA PARED */
     public void moverEnemigos(Protagonista protagonista, LectorEscenario escenario) {
 
         Random rm = new Random();
@@ -100,7 +111,6 @@ public class GestorEnemigo {
             int nvaFila = filaEnemigo;
             int nvaColum = columEnemigo;
     
-            //************************************************************************************ */
     
             if (cercaDelProta) {
                 // Mover hacia el protagonista, paso a paso, evitando paredes
@@ -127,8 +137,6 @@ public class GestorEnemigo {
                     // Luego Aquí vamos a agregar lógica para manejar el combate por ahora solo lo
                     // mostrara y pasara por encima del enemigo
                 }
-    
-                //*********************************************************************************** */
     
             } else {
                 // Movimiento aleatorio
@@ -163,7 +171,15 @@ public class GestorEnemigo {
         }
     }
 
-        //********paredes************//
+    /**
+     * Verifica si una celda es transitable para un enemigo, es decir, si está dentro de los límites del escenario,
+     * no es una pared y no está ocupada por otro enemigo.
+     * @param fila Fila de la celda.
+     * @param columna Columna de la celda.
+     * @param escenario El escenario del juego.
+     * @param posicionesOcupadasEnemigo Conjunto de posiciones ocupadas por enemigos.
+     * @return
+     */   
     private boolean esCeldaTransitable(int fila, int columna, LectorEscenario escenario, Set<String> posicionesOcupadasEnemigo) {
         return fila >= 0 && fila < escenario.getAlto()
             && columna >= 0 && columna < escenario.getAncho()
@@ -172,6 +188,10 @@ public class GestorEnemigo {
     }
 
 
+    /**
+     * Elimina un enemigo de la lista de enemigos gestionados.
+     * @param enemigo El enemigo a eliminar.
+     */
 
      public void eliminarEnemigo(Enemigo enemigo){
         enemigos.remove(enemigo);

@@ -9,7 +9,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
+/**
+ * Controlador de la vista inicial (Vista1) de la aplicación.
+ * Permite al usuario introducir los datos del protagonista, valida los puntos,
+ * inicializa el juego y gestiona el cambio a la siguiente escena.
+ */
 public class Vista1Controller {
 
     @FXML
@@ -30,6 +34,11 @@ public class Vista1Controller {
     @FXML
     private AnchorPane rootVista1;
 
+    /**
+     * Inicializa la vista. Establece el fondo y configura el evento del botón "Iniciar".
+     * Valida los datos introducidos, crea el protagonista y el motor del juego,
+     * inicializa el singleton Proveedor y cambia a la siguiente escena.
+     */
     @FXML
     public void initialize() {
         String rutaImg = "/com/poma/images/fondoMazmorra.png";
@@ -70,6 +79,11 @@ public class Vista1Controller {
         });
     }
 
+    /**
+     * Muestra un cuadro de diálogo de error con el título y mensaje especificados.
+     * @param titulo Título de la ventana de error.
+     * @param mensaje Mensaje a mostrar en el cuadro de diálogo.
+     */
     private void mostrarError(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(titulo);
