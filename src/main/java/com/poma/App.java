@@ -8,10 +8,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-/**@author
- * Rebeca Poma
- * Diego Guerrero
- * Ronic Leal
+/**
+ * @author Rebeca Poma
+ * @author Ronic Leal
+ * @author Diego Guerrero
  */
 public class App extends Application {
 

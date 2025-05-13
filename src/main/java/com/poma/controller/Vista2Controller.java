@@ -19,7 +19,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-
+/**
+ * Controlador de la segunda vista principal del juego.
+ * Se encarga de mostrar el mapa, el protagonista, los enemigos y las estadísticas,
+ * así como de gestionar el movimiento del protagonista y la actualización de la vista.
+ */
 public class Vista2Controller implements Observer {
 
     private Image protagonistaArriba;
@@ -30,14 +34,23 @@ public class Vista2Controller implements Observer {
     private Image imgSuelo;
     private Image imgPared;
 
+    /**Contenedor raíz de la vista, definido en el FXML. */
     @FXML
     private HBox root;
-
+     /** GridPane principal para dibujar el mapa. */
     private GridPane mainGridPane;
+    /** Referencia al motor del juego. */
     private MotorJuego motorJuego;
+    /** Referencia al protagonista. */
     private Protagonista protagonista;
+    /** VBox para mostrar las estadísticas del jugador. */
     private VBox datosJugador;
 
+    /**
+     * Permite establecer el protagonista desde fuera del controlador.
+     * Actualiza la vista si el GridPane ya está inicializado.
+     * @param protagonista Protagonista a mostrar.
+     */
     public void setProtagonista(Protagonista protagonista) {
         this.protagonista = protagonista;
         Proveedor.getInstance().setProtagonista(protagonista);
@@ -48,6 +61,10 @@ public class Vista2Controller implements Observer {
         }
     }
 
+    /**
+     * Inicializa la vista: carga imágenes, configura el mapa, añade observador,
+     * crea el panel de estadísticas y configura los eventos de teclado.
+     */
     @FXML
     public void initialize() {
         try {
@@ -95,6 +112,10 @@ public class Vista2Controller implements Observer {
             datosJugador.setPadding(new Insets(10));
             actualizarDatosJugador();
 
+            root.getStylesheets().add(getClass().getResource("/com/poma/styles/style.css").toExternalForm());
+
+            root.setSpacing(30); // Espacio horizontal entre mainGridPane y datosJugador
+            
             root.getChildren().addAll(mainGridPane, datosJugador);
 
             actualizarVista();
@@ -109,6 +130,9 @@ public class Vista2Controller implements Observer {
 
     }
 
+    /**
+     * Actualiza los datos y estadísticas mostrados del protagonista.
+     */
     private void actualizarDatosJugador() {
         datosJugador.getChildren().clear();
 
@@ -120,17 +144,22 @@ public class Vista2Controller implements Observer {
             Label lblPosicion = new Label(
                     "Protagonista en fila: " + protagonista.getFila() + ", columna: " + protagonista.getColumna());
 
-            Font fuente = Font.font("Arial", 20);
-            lblNombre.setFont(fuente);
-            lblVida.setFont(fuente);
-            lblDefensa.setFont(fuente);
-            lblFuerza.setFont(fuente);
-            lblPosicion.setFont(fuente);
+            /** Estilos CSS */
+            datosJugador.getStyleClass().add("datos-jugador");
+            lblNombre.getStyleClass().add("datos-jugador-label");
+            lblVida.getStyleClass().add("datos-jugador-label");
+            lblDefensa.getStyleClass().add("datos-jugador-label");
+            lblFuerza.getStyleClass().add("datos-jugador-label");
+            lblPosicion.getStyleClass().add("datos-jugador-label");
 
             datosJugador.getChildren().addAll(lblNombre, lblVida, lblDefensa, lblFuerza, lblPosicion);
         }
     }
 
+    /**
+     * Gestiona el evento de teclado para mover al protagonista según la tecla pulsada.
+     * @param event Evento de teclado.
+     */
     private void manejarMovimiento(KeyEvent event) {
         System.out.println("Tecla presionada: " + event.getCode());
         int nuevaFila = protagonista.getFila();
@@ -164,6 +193,9 @@ public class Vista2Controller implements Observer {
 
     }
 
+    /**
+     * Redibuja el mapa, el protagonista, los enemigos y actualiza las estadísticas.
+     */
     private void actualizarVista() {
         if (motorJuego == null || protagonista == null || mainGridPane == null) {
             System.err.println("Vista no puede actualizarse: motorJuego, protagonista o mainGridPane son null.");
@@ -240,6 +272,10 @@ public class Vista2Controller implements Observer {
 
     }
 
+    /**
+     * Método del patrón Observer. Se llama automáticamente cuando el modelo cambia.
+     * Actualiza la vista para reflejar los cambios.
+     */
     @Override
     public void onChange() {
         actualizarVista();

@@ -6,13 +6,22 @@ import java.util.List;
 import com.poma.interfaces.Observer;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
-
+/**
+ * Motor principal del juego. Se encarga de la lógica de movimiento, combate,
+ * gestión de enemigos, control del mapa y notificación a los observadores.
+ */
 public class MotorJuego {
     private Protagonista protagonista;
     private GestorEnemigo gestorEnemigo;
     private LectorEscenario mapa;
     private List<Observer> observadores = new ArrayList<>();
 
+    /**
+     * Crea un nuevo motor de juego, carga el mapa y posiciona al protagonista.
+     * @param rutaMapa Ruta al archivo del mapa.
+     * @param protagonista Instancia del protagonista.
+     * @throws RuntimeException Si ocurre un error al cargar el mapa.
+     */
     public MotorJuego(String rutaMapa, Protagonista protagonista) {
         this.protagonista = protagonista;
         try {
@@ -29,6 +38,11 @@ public class MotorJuego {
         notifyObservers();
     }
 
+    /**
+     * Busca la primera celda de tipo SUELO en el mapa para ubicar al protagonista.
+     * @return Un array con la fila y columna de la posición inicial.
+     * @throws IllegalStateException Si no se encuentra una celda SUELO.
+     */
     public int[] encontrarPosicionInicial() {
         for (int fila = 0; fila < mapa.getAlto(); fila++) {
             for (int columna = 0; columna < mapa.getAncho(); columna++) {
@@ -40,6 +54,13 @@ public class MotorJuego {
         throw new IllegalStateException("No se encontró una celda de tipo SUELO para ubicar al protagonista.");
     }
 
+    /**
+     * Intenta mover al protagonista a la posición indicada.
+     * Si hay un enemigo en la nueva posición, inicia un combate.
+     * Si la posición es válida y libre, mueve al protagonista y a los enemigos.
+     * @param nuevaFila nuevaFila Nueva fila de destino.
+     * @param nuevaColumna nuevaColumna Nueva columna de destino.
+     */
     public void moverProtagonista(int nuevaFila, int nuevaColumna) {
         if (esPosicionValida(nuevaFila, nuevaColumna)) {
             System.out.println("Nueva posición del protagonista: (" + nuevaFila + ", " + nuevaColumna + ")");
@@ -69,7 +90,12 @@ public class MotorJuego {
         }
     }
 
-    // Método para verificar si hay un enemigo en la posición
+    /**
+     * Verifica si hay un enemigo en la posición indicada.
+     * @param fila  Fila a comprobar.
+     * @param columna Columna a comprobar.
+     * @return true si hay un enemigo en esa posición, false en caso contrario.
+     */
     public boolean hayEnemigoEnPosicion(int fila, int columna) {
 
         for (Enemigo enemigo : gestorEnemigo.getEnemigos()) {
@@ -81,7 +107,13 @@ public class MotorJuego {
         return false;
     }
 
-    // Metodo para realizar el combate
+    /**
+     * Inicia un combate entre el protagonista y el enemigo en la posición dada.
+     * Calcula el daño, actualiza los puntos de vida y elimina al enemigo si es derrotado.
+     * Finaliza el juego si el protagonista muere.
+     * @param fila Fila donde ocurre el combate.
+     * @param columna Columna donde ocurre el combate.
+     */
 
     public void iniciarCombate(int fila, int columna) {
 
@@ -118,6 +150,9 @@ public class MotorJuego {
 
     }
 
+    /**
+     * Finaliza el juego mostrando una alerta y cerrando la aplicación.
+     */
     public void finalizarJuego() {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -132,11 +167,10 @@ public class MotorJuego {
     }
 
     /**
-     * es para controlar que la posicion sea valida para el protagonista que su
-     * limite sea pared     * 
-     * @param fila
-     * @param columna
-     * @return
+     * Verifica si la posición indicada es válida para el protagonista (dentro de los límites y no es pared).
+     * @param fila Fila a comprobar.
+     * @param columna  Columna a comprobar.
+     * @return true si la posición es válida, false en caso contrario.
      */
 
     private boolean esPosicionValida(int fila, int columna) {
@@ -146,7 +180,6 @@ public class MotorJuego {
             return false; // Fuera de los límites
         }
         Celda celda = mapa.getCelda(fila, columna);
-        // if (celda.getTipo() == TipoCelda.PARED && celda.getTipo() == TipoCelda.SUELO)
         if (celda.getTipo() == TipoCelda.PARED) {
             System.out.println("Celda actual: " + celda.getTipo());
             return false; // Si la celda es una pared
@@ -155,18 +188,33 @@ public class MotorJuego {
 
     }
 
+    /**
+     * Devuelve el lector de escenario (mapa) actual.
+     * @return LectorEscenario utilizado en el juego.
+     */
     public LectorEscenario getMapa() {
         return mapa;
     }
 
+    /**
+     * Devuelve el gestor de enemigos actual.
+     * @return GestorEnemigo utilizado en el juego.
+     */
     public GestorEnemigo getGestorEnemigo() {
         return gestorEnemigo;
     }
 
+    /**
+     * Añade un observador para recibir notificaciones de cambios en el juego.
+     * @param o Observador a añadir.
+     */
     public void addObserver(Observer o) {
         observadores.add(o);
     }
 
+    /**
+     * Notifica a todos los observadores registrados sobre un cambio en el estado del juego.
+     */
     private void notifyObservers() {
         for (Observer o : observadores) {
             o.onChange();
