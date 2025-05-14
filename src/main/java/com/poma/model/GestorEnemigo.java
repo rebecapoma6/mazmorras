@@ -114,10 +114,16 @@ public class GestorEnemigo {
     
             if (cercaDelProta) {
                 // Mover hacia el protagonista, paso a paso, evitando paredes
-    
+                //para que se alejen solo pongo un - antes de Integer
                 int dFila = Integer.compare(filaProta, filaEnemigo);
                 int dCol = Integer.compare(columProta, columEnemigo);
-    
+
+                     // HUYE SOLO ESQUELETO
+                //     if (enemigo.getNombre().equals("Esqueleto")) {
+                //     dFila = -dFila;
+                //     dCol = -dCol;
+                // }
+                    
                 // Intentar movimiento vertical primero
                 if (dFila != 0 && esCeldaTransitable(filaEnemigo + dFila, columEnemigo, escenario, posicionesOcupadasEnemigo)) {
                     nvaFila = filaEnemigo + dFila;
@@ -181,9 +187,14 @@ public class GestorEnemigo {
      * @return
      */   
     private boolean esCeldaTransitable(int fila, int columna, LectorEscenario escenario, Set<String> posicionesOcupadasEnemigo) {
+        // boolean movimientoHabilitado = false; // Cambia esto a true para volver a activar el movimiento
+
+        // if (!movimientoHabilitado) {
+        //     return false;
+        // }
         return fila >= 0 && fila < escenario.getAlto()
             && columna >= 0 && columna < escenario.getAncho()
-            && escenario.getCelda(fila, columna).getTipo() != TipoCelda.PARED
+            && escenario.getCelda(fila, columna).getTipo() != TipoCelda.PARED 
             && !posicionesOcupadasEnemigo.contains(fila + "," + columna);
     }
 

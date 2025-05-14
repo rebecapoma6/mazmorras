@@ -8,5 +8,5 @@ package com.poma.model;
  * </ul>
  */
 public enum TipoCelda {
-    SUELO,PARED
+    SUELO,PARED,CASILLADANIO
 }

@@ -73,6 +73,9 @@ public class LectorEscenario {
                         case '#':
                             tipo = TipoCelda.PARED;
                             break;
+                        case '?':
+                            tipo = TipoCelda.CASILLADANIO;
+                            break;
                         default:
                             throw new IllegalArgumentException("Símbolo no reconocido: " + simbolo);
                     }

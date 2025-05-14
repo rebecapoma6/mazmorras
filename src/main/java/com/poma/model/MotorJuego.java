@@ -82,6 +82,16 @@ public class MotorJuego {
 
             } else {
                 protagonista.setPosicion(nuevaFila, nuevaColumna);
+
+           
+            Celda celdaActual = mapa.getCelda(nuevaFila, nuevaColumna);
+            if (celdaActual.getTipo()== TipoCelda.CASILLADANIO) {
+                protagonista.danioNvaCelda(5);
+               finalizarJuego();
+               return;
+            }
+
+            // --- FIN DEL BLOQUE NUEVO ---
                 gestorEnemigo.moverEnemigos(protagonista, mapa);
                 notifyObservers();
 
@@ -132,6 +142,7 @@ public class MotorJuego {
 
                 // VERIFICAR SI EL ENEMIGO HA SIDO DERROTADO
                 if (!enemigo.estaVivo()) {
+                    //protagonista.setPuntosVida(protagonista.getPuntosVida() + 5); // AUMENTAR PUNTOS VIDA
                     System.out.println(enemigo.getNombre() + " ha sido derrotado ");
                     gestorEnemigo.eliminarEnemigo(enemigo);
 
@@ -180,6 +191,7 @@ public class MotorJuego {
             return false; // Fuera de los límites
         }
         Celda celda = mapa.getCelda(fila, columna);
+        //if (celda.getTipo() == TipoCelda.SUELO && celda.getTipo() == TipoCelda.PARED)
         if (celda.getTipo() == TipoCelda.PARED) {
             System.out.println("Celda actual: " + celda.getTipo());
             return false; // Si la celda es una pared

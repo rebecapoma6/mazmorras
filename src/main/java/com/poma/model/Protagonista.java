@@ -51,4 +51,9 @@ public class Protagonista extends Personaje {
         return direccion;
     }
 
+
+    public void danioNvaCelda(int cantidad){
+        this.puntosVida -= defensa;
+    }
+
 }

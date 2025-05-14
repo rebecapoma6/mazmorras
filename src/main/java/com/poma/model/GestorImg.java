@@ -49,5 +49,6 @@ public class GestorImg {
      */
     public static final String SUELO = "/com/poma/images/suelo.jpg";
     public static final String PARED = "/com/poma/images/pared.jpg";
+    public static final String CASILLADANIO = "/com/poma/images/imgDanio.png";
     
 }
