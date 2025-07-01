@@ -14,7 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
+//import javafx.scene.text.Font;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -92,19 +92,19 @@ public class Vista2Controller implements Observer {
 
             // Establecer el tamaño de las celdas
             for (int i = 0; i < motorJuego.getMapa().getAncho(); i++) {
-                ColumnConstraints columnConstraints = new ColumnConstraints();
-                columnConstraints.setMinWidth(60); // Establece el ancho mínimo de cada columna
-                columnConstraints.setPrefWidth(60); // Establece el ancho preferido
-                columnConstraints.setMaxWidth(60); // Establece el ancho máximo
-                mainGridPane.getColumnConstraints().add(columnConstraints);
+                ColumnConstraints columCons = new ColumnConstraints();
+                columCons.setMinWidth(60); // Establece el ancho mínimo de cada columna
+                columCons.setPrefWidth(60); // Establece el ancho preferido
+                columCons.setMaxWidth(60); // Establece el ancho máximo
+                mainGridPane.getColumnConstraints().add(columCons);
             }
 
             for (int i = 0; i < motorJuego.getMapa().getAlto(); i++) {
-                RowConstraints rowConstraints = new RowConstraints();
-                rowConstraints.setMinHeight(60); // Establece la altura mínima de cada fila
-                rowConstraints.setPrefHeight(60); // Establece la altura preferida
-                rowConstraints.setMaxHeight(60); // Establece la altura máxima
-                mainGridPane.getRowConstraints().add(rowConstraints);
+                RowConstraints rowConst = new RowConstraints();
+                rowConst.setMinHeight(60); // Establece la altura mínima de cada fila
+                rowConst.setPrefHeight(60); // Establece la altura preferida
+                rowConst.setMaxHeight(60); // Establece la altura máxima
+                mainGridPane.getRowConstraints().add(rowConst);
             }
 
             // VBox con estadísticas del protagonista
